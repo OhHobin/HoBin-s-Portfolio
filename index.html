@@ -8,344 +8,120 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f4f8fd;
-      --bg2: #ffffff;
-      --bg3: #e8f0fa;
-      --line: #c8d8ee;
-      --accent: #3a7bd5;
-      --accent2: #6aabf7;
-      --text: #1a2a40;
-      --text2: #4a6080;
-      --text3: #8aa0bb;
+      --bg:#f4f8fd; --bg2:#ffffff; --bg3:#e8f0fa; --line:#c8d8ee;
+      --accent:#3a7bd5; --accent2:#6aabf7; --text:#1a2a40; --text2:#4a6080; --text3:#8aa0bb;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(244,248,253,0.93);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-logo {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text2);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-grid-bg {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.4;
-      pointer-events: none;
-    }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 5rem 3rem 5rem 5rem; position: relative;
-    }
-    .hero-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem; color: var(--accent);
-      letter-spacing: 0.2em; text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .hero-tag::before {
-      content: ''; display: block;
-      width: 30px; height: 1px; background: var(--accent);
-    }
-    .hero-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      line-height: 1.05; font-weight: 400;
-      margin-bottom: 0.3rem; letter-spacing: -0.02em; color: var(--text);
-    }
-    .hero-name-en {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      color: var(--text2); font-style: italic; margin-bottom: 2rem;
-    }
-    .hero-desc {
-      font-size: 1rem; line-height: 1.8; color: var(--text2);
-      max-width: 420px;
-      border-left: 2px solid var(--accent); padding-left: 1.2rem;
-      margin-bottom: 3rem;
-    }
-    .hero-traits { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 3rem; }
-    .hero-trait {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem; color: var(--text3);
-      letter-spacing: 0.05em;
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .hero-trait span { color: var(--accent); }
-    .hero-cta { display: flex; gap: 1rem; }
-    .btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.8rem 1.8rem; border: 1px solid;
-      text-decoration: none; transition: all 0.25s; cursor: pointer;
-    }
-    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .btn-primary:hover { background: transparent; color: var(--accent); }
-    .btn-secondary { background: transparent; color: var(--text2); border-color: var(--line); }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-
-    .hero-right {
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      padding: 5rem 5rem 5rem 3rem; position: relative;
-    }
-    .hero-stats {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; background: var(--line);
-      border: 1px solid var(--line); width: 100%; max-width: 400px;
-    }
-    .stat-box { background: var(--bg2); padding: 1.8rem; transition: background 0.2s; }
-    .stat-box:hover { background: var(--bg3); }
-    .stat-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.8rem; color: var(--accent); line-height: 1; margin-bottom: 0.4rem;
-    }
-    .stat-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; color: var(--text3);
-      letter-spacing: 0.1em; text-transform: uppercase;
-    }
-    .hero-contact {
-      margin-top: 1.5rem; width: 100%; max-width: 400px;
-      border: 1px solid var(--line); background: var(--bg2);
-      padding: 1.4rem 1.8rem;
-      display: flex; flex-direction: column; gap: 0.9rem;
-    }
-    .contact-info-row { display: flex; flex-direction: column; gap: 0.2rem; }
-    .contact-info-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; color: var(--text3);
-      letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    .contact-info-value {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem; color: var(--text);
-    }
-    .contact-info-value a { color: var(--accent); text-decoration: none; }
-    .contact-divider { width: 100%; height: 1px; background: var(--line); }
-    .contact-status {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem; color: var(--accent);
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .status-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-    /* SECTIONS */
-    section { padding: 8rem 5rem; border-top: 1px solid var(--line); }
-    .section-header {
-      display: flex; align-items: center; gap: 1.5rem; margin-bottom: 5rem;
-    }
-    .section-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em;
-    }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; color: var(--text);
-    }
-    .section-line { flex: 1; height: 1px; background: var(--line); }
-
-    /* ABOUT */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .edu-item {
-      padding: 2rem; border: 1px solid var(--line); background: var(--bg2);
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .edu-item:hover {
-      border-color: var(--accent);
-      box-shadow: 0 4px 20px rgba(58,123,213,0.08);
-    }
-    .edu-year { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent); margin-bottom: 0.6rem; }
-    .edu-school { font-size: 1rem; font-weight: 500; margin-bottom: 0.3rem; color: var(--text); }
-    .edu-dept { font-size: 0.85rem; color: var(--text2); margin-bottom: 0.5rem; }
-    .edu-gpa { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--accent); }
-
-    .about-skills { display: flex; flex-direction: column; gap: 1rem; }
-    .skill-row { display: flex; align-items: center; gap: 1rem; }
-    .skill-name {
-      font-family: 'Space Mono', monospace; font-size: 0.72rem;
-      color: var(--text2); width: 140px; flex-shrink: 0;
-    }
-    .skill-bar { flex: 1; height: 3px; background: var(--line); overflow: hidden; }
-    .skill-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform-origin: left; transform: scaleX(0);
-      animation: fillBar 1.5s ease forwards;
-    }
-    @keyframes fillBar { to { transform: scaleX(1); } }
-
-    /* PROJECTS */
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 1px; background: var(--line); border: 1px solid var(--line);
-    }
-    .project-card {
-      background: var(--bg2); padding: 2.5rem;
-      position: relative; transition: background 0.25s; overflow: hidden;
-    }
-    .project-card::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      width: 3px; height: 0; background: var(--accent); transition: height 0.3s;
-    }
-    .project-card:hover { background: var(--bg3); }
-    .project-card:hover::before { height: 100%; }
-    .project-period { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--text3); margin-bottom: 0.8rem; }
-    .project-title { font-size: 1rem; font-weight: 500; line-height: 1.4; margin-bottom: 1rem; color: var(--text); }
-    .project-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.2rem; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .tag {
-      font-family: 'Space Mono', monospace; font-size: 0.6rem;
-      padding: 0.3rem 0.7rem; border: 1px solid var(--line);
-      color: var(--text3); background: var(--bg);
-    }
-    .tag.accent { border-color: var(--accent2); color: var(--accent); background: #ebf3fd; }
-    .project-contrib {
-      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line);
-      font-size: 0.78rem; color: var(--accent); font-style: italic; line-height: 1.6;
-    }
-
-    /* PUBLICATIONS */
-    .pub-list {
-      display: flex; flex-direction: column;
-      gap: 1px; background: var(--line); border: 1px solid var(--line);
-    }
-    .pub-item {
-      background: var(--bg2); padding: 2rem 2.5rem;
-      display: grid; grid-template-columns: auto 1fr auto;
-      gap: 2rem; align-items: start; transition: background 0.2s;
-    }
-    .pub-item:hover { background: var(--bg3); }
-    .pub-badge {
-      font-family: 'Space Mono', monospace; font-size: 0.6rem;
-      padding: 0.3rem 0.6rem; border: 1px solid;
-      text-align: center; line-height: 1.4; white-space: nowrap; align-self: start;
-    }
-    .pub-badge.ieee { border-color: var(--accent); color: var(--accent); background: #ebf3fd; }
-    .pub-badge.domestic { border-color: var(--text3); color: var(--text3); background: #f5f7fa; }
-    .pub-badge.review { border-color: #e8a020; color: #c07800; background: #fff8eb; }
-    .pub-title { font-size: 0.9rem; font-weight: 500; line-height: 1.6; margin-bottom: 0.4rem; color: var(--text); }
-    .pub-venue { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); margin-bottom: 0.2rem; }
-    .pub-note { font-size: 0.75rem; color: var(--text2); margin-top: 0.3rem; }
-    .pub-author { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent); white-space: nowrap; font-weight: 700; }
-
-    /* ACTIVITIES */
-    .activities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .timeline { position: relative; padding-left: 2rem; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 1px; background: var(--line);
-    }
-    .timeline-item { position: relative; padding: 0 0 2.2rem 2.5rem; }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -4px; top: 6px;
-      width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
-    }
-    .timeline-period { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent); margin-bottom: 0.3rem; }
-    .timeline-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; color: var(--text); }
-    .timeline-sub { font-size: 0.8rem; color: var(--text2); line-height: 1.5; }
-
-    /* FOOTER */
-    footer {
-      padding: 4rem 5rem; border-top: 1px solid var(--line);
-      display: flex; justify-content: space-between; align-items: center;
-      background: var(--bg2);
-    }
-    .footer-name { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--text3); }
-    .footer-info { text-align: right; }
-    .footer-info p { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text3); margin-bottom: 0.3rem; }
-    .footer-info a { color: var(--accent); text-decoration: none; }
-
-    /* SECTION LABEL */
-    .sub-label {
-      font-family: 'Space Mono', monospace; font-size: 0.72rem;
-      color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    /* FADE */
-    .fade-up {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--line); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.2rem; }
-      #hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 7rem 1.5rem 2rem; }
-      .hero-right { padding: 2rem 1.5rem 4rem; }
-      section { padding: 5rem 1.5rem; }
-      .about-grid, .activities-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .pub-item { grid-template-columns: 1fr; gap: 0.8rem; }
-      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-      .footer-info { text-align: center; }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-weight:300;overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(244,248,253,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+    .nav-logo{font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--text2);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent);}
+    #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:80px;position:relative;overflow:hidden;}
+    .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:60px 60px;opacity:0.4;pointer-events:none;}
+    .hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3rem 5rem 5rem;position:relative;}
+    .hero-tag{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;}
+    .hero-tag::before{content:'';display:block;width:30px;height:1px;background:var(--accent);}
+    .hero-name{font-family:'DM Serif Display',serif;font-size:clamp(3rem,6vw,5.5rem);line-height:1.05;font-weight:400;margin-bottom:0.3rem;letter-spacing:-0.02em;color:var(--text);}
+    .hero-name-en{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--text2);font-style:italic;margin-bottom:2rem;}
+    .hero-desc{font-size:1rem;line-height:1.8;color:var(--text2);max-width:420px;border-left:2px solid var(--accent);padding-left:1.2rem;margin-bottom:3rem;}
+    .hero-traits{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:3rem;}
+    .hero-trait{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.05em;display:flex;align-items:center;gap:0.6rem;}
+    .hero-trait span{color:var(--accent);}
+    .hero-cta{display:flex;gap:1rem;}
+    .btn{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.8rem;border:1px solid;text-decoration:none;transition:all 0.25s;cursor:pointer;}
+    .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .btn-primary:hover{background:transparent;color:var(--accent);}
+    .hero-right{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:5rem 5rem 5rem 3rem;position:relative;}
+    .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);width:100%;max-width:400px;}
+    .stat-box{background:var(--bg2);padding:1.8rem;transition:background 0.2s;}
+    .stat-box:hover{background:var(--bg3);}
+    .stat-num{font-family:'DM Serif Display',serif;font-size:2.8rem;color:var(--accent);line-height:1;margin-bottom:0.4rem;}
+    .stat-label{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;}
+    .hero-contact{margin-top:1.5rem;width:100%;max-width:400px;border:1px solid var(--line);background:var(--bg2);padding:1.4rem 1.8rem;display:flex;flex-direction:column;gap:0.9rem;}
+    .contact-info-row{display:flex;flex-direction:column;gap:0.2rem;}
+    .contact-info-label{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;}
+    .contact-info-value{font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--text);}
+    .contact-info-value a{color:var(--accent);text-decoration:none;}
+    .contact-divider{width:100%;height:1px;background:var(--line);}
+    .contact-status{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--accent);display:flex;align-items:center;gap:0.5rem;}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+    section{padding:8rem 5rem;border-top:1px solid var(--line);}
+    .section-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:5rem;}
+    .section-num{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.15em;}
+    .section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:400;color:var(--text);}
+    .section-line{flex:1;height:1px;background:var(--line);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+    .edu-item{padding:2rem;border:1px solid var(--line);background:var(--bg2);transition:border-color 0.2s,box-shadow 0.2s;}
+    .edu-item:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(58,123,213,0.08);}
+    .edu-year{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--accent);margin-bottom:0.6rem;}
+    .edu-school{font-size:1rem;font-weight:500;margin-bottom:0.3rem;color:var(--text);}
+    .edu-dept{font-size:0.85rem;color:var(--text2);margin-bottom:0.5rem;}
+    .edu-gpa{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--accent);}
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+    .project-card{background:var(--bg2);padding:2.5rem;position:relative;transition:background 0.25s;overflow:hidden;}
+    .project-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--accent);transition:height 0.3s;}
+    .project-card:hover{background:var(--bg3);}
+    .project-card:hover::before{height:100%;}
+    .project-period{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--text3);margin-bottom:0.8rem;}
+    .project-title{font-size:1rem;font-weight:500;line-height:1.4;margin-bottom:1rem;color:var(--text);}
+    .project-desc{font-size:0.82rem;color:var(--text2);line-height:1.7;margin-bottom:1.2rem;}
+    .project-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+    .tag{font-family:'Space Mono',monospace;font-size:0.6rem;padding:0.3rem 0.7rem;border:1px solid var(--line);color:var(--text3);background:var(--bg);}
+    .tag.accent{border-color:var(--accent2);color:var(--accent);background:#ebf3fd;}
+    .project-contrib{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);font-size:0.78rem;color:var(--accent);font-style:italic;line-height:1.6;}
+    .pub-list{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+    .pub-item{background:var(--bg2);padding:2rem 2.5rem;display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:start;transition:background 0.2s;}
+    .pub-item:hover{background:var(--bg3);}
+    .pub-badge{font-family:'Space Mono',monospace;font-size:0.6rem;padding:0.3rem 0.6rem;border:1px solid;text-align:center;line-height:1.4;white-space:nowrap;align-self:start;}
+    .pub-badge.ieee{border-color:var(--accent);color:var(--accent);background:#ebf3fd;}
+    .pub-badge.domestic{border-color:var(--text3);color:var(--text3);background:#f5f7fa;}
+    .pub-badge.review{border-color:#e8a020;color:#c07800;background:#fff8eb;}
+    .pub-title{font-size:0.9rem;font-weight:500;line-height:1.6;margin-bottom:0.4rem;color:var(--text);}
+    .pub-venue{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--text3);margin-bottom:0.2rem;}
+    .pub-note{font-size:0.75rem;color:var(--text2);margin-top:0.3rem;}
+    .pub-author{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);white-space:nowrap;font-weight:700;}
+    .activities-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+    .timeline{position:relative;padding-left:2rem;}
+    .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--line);}
+    .timeline-item{position:relative;padding:0 0 2.2rem 2.5rem;}
+    .timeline-item::before{content:'';position:absolute;left:-4px;top:6px;width:8px;height:8px;background:var(--accent);border-radius:50%;}
+    .timeline-period{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.3rem;}
+    .timeline-title{font-size:0.95rem;font-weight:500;margin-bottom:0.2rem;color:var(--text);}
+    .timeline-sub{font-size:0.8rem;color:var(--text2);line-height:1.5;}
+    .team-proj-box{border:1px solid var(--line);background:var(--bg3);padding:1rem 1.2rem;margin-top:0.6rem;}
+    .team-proj-row{display:flex;gap:0.5rem;align-items:baseline;margin-bottom:0.4rem;font-size:0.78rem;color:var(--text2);line-height:1.5;}
+    .team-proj-row:last-child{margin-bottom:0;}
+    .team-proj-row .lbl{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--accent);min-width:46px;flex-shrink:0;}
+    footer{padding:4rem 5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);}
+    .footer-name{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text3);}
+    .footer-info{text-align:right;}
+    .footer-info p{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--text3);margin-bottom:0.3rem;}
+    .footer-info a{color:var(--accent);text-decoration:none;}
+    .sub-label{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;display:block;}
+    .fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    ::-webkit-scrollbar{width:4px;}
+    ::-webkit-scrollbar-track{background:var(--bg);}
+    ::-webkit-scrollbar-thumb{background:var(--line);}
+    ::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+    @media(max-width:900px){
+      nav{padding:1rem 1.5rem;} .nav-links{gap:1.2rem;}
+      #hero{grid-template-columns:1fr;min-height:auto;}
+      .hero-left{padding:7rem 1.5rem 2rem;} .hero-right{padding:2rem 1.5rem 4rem;}
+      section{padding:5rem 1.5rem;}
+      .about-grid,.activities-grid{grid-template-columns:1fr;gap:2rem;}
+      .projects-grid{grid-template-columns:1fr;}
+      .pub-item{grid-template-columns:1fr;gap:0.8rem;}
+      footer{flex-direction:column;gap:1.5rem;text-align:center;} .footer-info{text-align:center;}
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">HoBin Oh</div>
   <ul class="nav-links">
@@ -364,7 +140,7 @@
     <h1 class="hero-name">오호빈</h1>
     <p class="hero-name-en">HoBin Oh</p>
     <p class="hero-desc">
-      FPGA Zynq 기반 하드웨어 설계 엔지니어.<br>
+      FPGA·Zynq 기반 하드웨어 설계 엔지니어.<br>
       영상처리와 AI 가속기 설계 연구를 수행합니다.
     </p>
     <div class="hero-traits">
@@ -374,28 +150,15 @@
     </div>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="mailto:hobin0676@daum.net" class="btn btn-secondary">Contact</a>
     </div>
   </div>
 
   <div class="hero-right">
     <div class="hero-stats">
-      <div class="stat-box">
-        <div class="stat-num">5+</div>
-        <div class="stat-label">Research Projects</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">8+</div>
-        <div class="stat-label">Publications</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">4.5</div>
-        <div class="stat-label">Major GPA / 4.5</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">4×</div>
-        <div class="stat-label">IEEE Papers</div>
-      </div>
+      <div class="stat-box"><div class="stat-num">5+</div><div class="stat-label">Research Projects</div></div>
+      <div class="stat-box"><div class="stat-num">8+</div><div class="stat-label">Publications</div></div>
+      <div class="stat-box"><div class="stat-num">4.5</div><div class="stat-label">Major GPA / 4.5</div></div>
+      <div class="stat-box"><div class="stat-num">4×</div><div class="stat-label">IEEE Papers</div></div>
     </div>
     <div class="hero-contact">
       <div class="contact-info-row">
@@ -408,10 +171,7 @@
         <span class="contact-info-value">010-7607-0676</span>
       </div>
       <div class="contact-divider"></div>
-      <div class="contact-status">
-        <div class="status-dot"></div>
-        성균관대학교 석사과정 재학 중
-      </div>
+      <div class="contact-status"><div class="status-dot"></div>성균관대학교 석사과정 재학 중</div>
     </div>
   </div>
 </section>
@@ -423,11 +183,9 @@
     <h2 class="section-title">About</h2>
     <div class="section-line"></div>
   </div>
-
   <div class="about-grid">
-    <!-- 왼쪽: 학력 + 수상/자격 -->
     <div>
-      <p class="sub-label">Education</p>
+      <span class="sub-label">Education</span>
       <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem;">
         <div class="edu-item fade-up">
           <div class="edu-year">2024.08 – 2026.08 (졸업 예정)</div>
@@ -443,7 +201,7 @@
         </div>
       </div>
 
-      <p class="sub-label">Awards &amp; Certifications</p>
+      <span class="sub-label">Awards &amp; Certifications</span>
       <div style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
         <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
           <div class="edu-year">2023.12</div>
@@ -460,7 +218,7 @@
         </div>
       </div>
 
-      <p class="sub-label">1저자 논문 현황</p>
+      <span class="sub-label">1저자 논문 현황</span>
       <div class="edu-item fade-up" style="padding:1.4rem 1.8rem;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem 1.5rem;">
           <div>
@@ -470,11 +228,11 @@
           </div>
           <div>
             <div class="edu-year" style="margin-bottom:0.2rem;">국내 저널</div>
-            <div style="font-size:0.85rem;font-weight:500;">2편</div>
-            <div style="font-size:0.75rem;color:var(--text2);">전자공학회, 반도체디스플레이기술학회</div>
+            <div style="font-size:0.85rem;font-weight:500;">1편</div>
+            <div style="font-size:0.75rem;color:var(--text2);">전자공학회</div>
           </div>
           <div>
-            <div class="edu-year" style="margin-bottom:0.2rem;">국제 학회 (IEEE)</div>
+            <div class="edu-year" style="margin-bottom:0.2rem;">국제 학회 (IEEE 등재)</div>
             <div style="font-size:0.85rem;font-weight:500;">3편</div>
             <div style="font-size:0.75rem;color:var(--text2);">ICCE-Asia, ITC-CSCC, ICMRE</div>
           </div>
@@ -487,68 +245,32 @@
       </div>
     </div>
 
-    <!-- 오른쪽: 기술스택 + 연구분야 -->
     <div>
-      <p class="sub-label">Technical Skills</p>
-      <div class="about-skills fade-up" style="margin-bottom:2.5rem;">
-        <div class="skill-row">
-          <span class="skill-name">Verilog HDL</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">Vivado / Vitis-AI</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">FPGA 설계</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">AXI / AMBA Bus</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">RTL 시뮬레이션</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">Python</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">C / Assembly</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-name">VCS &amp; Verdi</span>
-          <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
-        </div>
-      </div>
-
-      <p class="sub-label">Research Areas</p>
+      <span class="sub-label">Research Areas</span>
       <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem;" class="fade-up">
-        <span class="tag accent">FPGA / SoC 설계</span>
-        <span class="tag accent">AI 가속기</span>
+        <span class="tag accent">RTL 설계</span>
+        <span class="tag accent">FPGA / Zynq 구현</span>
         <span class="tag accent">영상처리 가속</span>
-        <span class="tag accent">자율주행 아키텍처</span>
-        <span class="tag">RISC-V 프로세서</span>
-        <span class="tag">Cache Controller</span>
-        <span class="tag">RTL 설계</span>
-        <span class="tag">산업용 통신 (EtherCAT)</span>
-        <span class="tag">ASIC 설계</span>
+        <span class="tag accent">AI 가속</span>
+        <span class="tag accent">SoC</span>
       </div>
 
-      <p class="sub-label">Tools &amp; Environment</p>
+      <span class="sub-label">Tools &amp; Environment</span>
       <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" class="fade-up">
-        <span class="tag">Vivado</span>
-        <span class="tag">Vitis-AI</span>
-        <span class="tag">VCS &amp; Verdi</span>
-        <span class="tag">FINN</span>
-        <span class="tag">Xilinx Zynq</span>
-        <span class="tag">Ultra96-V2</span>
-        <span class="tag">Nexys A7</span>
+        <span class="tag">Xilinx Vivado</span>
+        <span class="tag">PYNQ Framework</span>
+        <span class="tag">Vitis / SDK</span>
+        <span class="tag">Synopsys VCS / Verdi</span>
+        <span class="tag">Quartus</span>
+        <span class="tag">ModelSim</span>
+        <span class="tag">Icarus Verilog</span>
+        <span class="tag">Verilator</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">VIM</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Python</span>
+        <span class="tag">C / C++</span>
         <span class="tag">Linux</span>
-        <span class="tag">Git</span>
       </div>
     </div>
   </div>
@@ -564,24 +286,39 @@
 
   <div class="projects-grid">
 
-    <!-- Project 1 -->
-    <div class="project-card fade-up">
-      <div class="project-period">2025.01 – 2026.01.16</div>
+    <!-- Project 1 - MAIN (wide) -->
+    <div class="project-card fade-up" style="grid-column:1/-1;">
+      <div class="project-period">2025.01 – 2026.01.16 &nbsp;|&nbsp; 메인 프로젝트</div>
       <div class="project-title">Zynq기반 서라운드 뷰 및 AI 가속기 통합 아키텍처</div>
-      <div class="project-desc">
-        HD 해상도 4채널 카메라(1280×720)를 896×1024 단채널 서라운드 뷰로 합성하고, FINN기반 Mobilenet v1 백본의 FCN-32s 가속기를 통합.
-        어안왜곡 보정 파라미터를 PS에서 SW로 동적 제어하여 LUT 기반 방식 대비 유연성 향상.
-        온칩 메모리 최적화로 DDR 대역폭 대폭 절감. End-to-End ≈ 32fps 달성.
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.2rem;">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.5rem;text-transform:uppercase;">Surround View Engine — 40fps</div>
+          <div class="project-desc" style="margin-bottom:0;">
+            4채널 HD 카메라(1280×720)를 896×1024 단채널 서라운드 뷰로 합성하여 <strong style="color:var(--text);">40fps</strong> 달성.<br><br>
+            <strong style="color:var(--text);">Fisheye 어안 왜곡 보정</strong>: 역매핑(Inverse Mapping) 방식으로 호모그래피 변환 구현. PS에서 카메라 내부 파라미터 및 호모그래피 행렬을 AXI4-Lite를 통해 동적으로 전달 가능하여 실시간 시점 변환 지원.<br><br>
+            <strong style="color:var(--text);">뷰 합성 최적화</strong>: Rotation 기능을 내부 Read-Modify-Write 방식으로 처리하여 외부 메모리(DDR) 접근 최소화. 온칩 메모리 활용으로 DDR 대역폭 대폭 절감.
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.5rem;text-transform:uppercase;">FINN-based FCN-32s Accelerator — End-to-End 32fps</div>
+          <div class="project-desc" style="margin-bottom:0;">
+            FINN 기반 Mobilenet v1 백본의 FCN-32s AI 가속기 통합. PS 후처리까지 포함한 <strong style="color:var(--text);">End-to-End ≈ 32fps</strong> 달성.<br><br>
+            Skip-Connection 없는 FCN-32s 채택으로 하드웨어 구현 친화적 설계.<br><br>
+            PL에서 특징맵만 추출 후 PS에서 업샘플링하는 구조로 PL-PS 전달 지연 최소화.
+          </div>
+        </div>
       </div>
       <div class="project-tags">
         <span class="tag">Verilog HDL</span><span class="tag">Python</span>
         <span class="tag">Vivado</span><span class="tag accent">FINN</span>
         <span class="tag accent">Zynq SoC</span><span class="tag">MIPI CSI-2</span>
-        <span class="tag">AXI4-Stream</span>
+        <span class="tag">AXI4-Lite</span><span class="tag">AXI4-Stream</span>
+        <span class="tag">Fisheye Correction</span><span class="tag">Homography</span>
       </div>
       <div class="project-contrib">
-        → PL에서 특징맵만 추출 후 PS에서 업샘플링 → PL-PS 전달 지연 최소화<br>
-        → Skip-Connection 없는 FCN-32s 채택으로 하드웨어 구현 친화적 설계
+        → Surround View 40fps / PS 후처리 포함 End-to-End 32fps<br>
+        → Read-Modify-Write 방식으로 외부 메모리 접근 최소화 / DDR 대역폭 절감<br>
+        → IEEE ICCE-Asia (포스터), IEEE ITC-CSCC (구두) 게재
       </div>
     </div>
 
@@ -599,35 +336,13 @@
         <span class="tag accent">Zynq (Ultra96-V2)</span><span class="tag">PWM IP</span>
       </div>
       <div class="project-contrib">
-        → 2024/2025 교내 동계 단기강좌 〈자율주행 AI칩 설계〉 진행<br>
-        → 제 3회 성균관대학교 자율주행 경진대회 총괄 진행<br>
+        → 교내 동계 단기강좌 〈자율주행 AI칩 설계〉 진행<br>
+        → 제 3회 성균관대학교 자율주행 경진대회 총괄<br>
         → IEEE Transactions on Intelligent Vehicles (SCIE, IF=14.3) 투고 (2저자)
       </div>
     </div>
 
     <!-- Project 3 -->
-    <div class="project-card fade-up">
-      <div class="project-period">2025.12 – 현재 (진행 중)</div>
-      <div class="project-title">산업용 고속 백플레인 통신 슬레이브 모듈</div>
-      <div class="project-desc">
-        EtherCAT 기반 백플레인 on-the-fly 통신 슬레이브 컨트롤러 설계.
-        저속 백플레인: LVDS PHY + 온칩 오버샘플링 CDR.
-        고속 백플레인: Transceiver PHY + PHY 내부 CDR + 온칩 디지털 신호 처리.
-        RTL 설계 완료 후 FPGA 검증, 펨리스 업체 통해 ASIC 제작 예정.
-      </div>
-      <div class="project-tags">
-        <span class="tag">Verilog HDL</span><span class="tag">Vivado</span>
-        <span class="tag accent">EtherCAT</span><span class="tag accent">ASIC 예정</span>
-        <span class="tag">LVDS PHY</span><span class="tag">Transceiver PHY</span>
-        <span class="tag">CDR</span>
-      </div>
-      <div class="project-contrib">
-        → YASKAWA 산업 표준 기반 슬레이브 컨트롤러<br>
-        → @ EtherCAT Technology Group 표준 적용
-      </div>
-    </div>
-
-    <!-- Project 4 -->
     <div class="project-card fade-up">
       <div class="project-period">2024.08.05 – 2024.09.13</div>
       <div class="project-title">영상처리기반 자율주행을 위한 전처리 가속기</div>
@@ -640,26 +355,25 @@
       <div class="project-tags">
         <span class="tag">Verilog HDL</span><span class="tag">Python</span>
         <span class="tag">Vivado</span><span class="tag accent">Ultra96-V2</span>
-        <span class="tag">VDMA</span><span class="tag">BEV Transform</span>
-        <span class="tag">Sobel</span>
+        <span class="tag">VDMA</span><span class="tag">BEV Transform</span><span class="tag">Sobel</span>
       </div>
       <div class="project-contrib">
-        → PS 처리 대비 실시간 1/5 시간 단축<br>
-        → FPGA 기반 영상처리 실시간성 입증, 환경 노이즈 한계 식별 → AI 기반 자율주행 도입 필요성 도출
+        → PS 처리 대비 1/5 시간 단축<br>
+        → FPGA 기반 영상처리 실시간성 입증 / AI 기반 자율주행 필요성 도출
       </div>
     </div>
 
-    <!-- Project 5 (wide) -->
-    <div class="project-card fade-up" style="grid-column: 1 / -1;">
+    <!-- Project 4 (wide) -->
+    <div class="project-card fade-up" style="grid-column:1/-1;">
       <div class="project-period">2023.07.03 – 2024.07.31 &nbsp;|&nbsp; 학사 졸업연구</div>
       <div class="project-title">[학사] FPGA를 이용한 RISC-V RV32I와 Cache 통합 설계</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.2rem;">
         <div>
           <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.5rem;text-transform:uppercase;">RISC-V RV32I Pipeline Processor</div>
           <div class="project-desc" style="margin-bottom:0;">
-            RV32I 명령어 기반 5-Stage Pipeline 설계 및 Hazard Unit(FWD, Stall, Flush)으로 해저드 해결.
-            Native → AMBA APB → AMBA AHB-Lite Bus Protocol 설계를 통한 Bus Protocol 이해.
-            Xilinx Nexys A7 보드에서 Max Freq. 50MHz 구현.
+            RV32I 명령어 기반 5-Stage Pipeline 설계 및 Hazard Unit(FWD, Stall, Flush) 해저드 해결.
+            Native → AMBA APB → AMBA AHB-Lite Bus Protocol 순차 설계.
+            Xilinx Nexys A7 보드 Max Freq. 50MHz 구현.
             Dhrystone, Coremark 벤치마크 동작 검증 및 성능 평가.
           </div>
         </div>
@@ -667,9 +381,8 @@
           <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.5rem;text-transform:uppercase;">Cache Controller</div>
           <div class="project-desc" style="margin-bottom:0;">
             Direct Mapped / N-Way Set-Associative / Fully Associative Cache Controller 설계.
-            가상 SDRAM Controller 환경 구축, Dhrystone·Coremark 벤치마크 성능 평가.
-            구조별 Hit rate, Vivado 구현 결과 Power·하드웨어 자원 분석으로
-            최적 임베디드 모델 도출 (Inst: 16KB, Data: 4KB @ 4-Way).
+            가상 SDRAM Controller 환경 구축, 벤치마크 성능 평가.
+            구조별 Hit rate, Power·자원 분석으로 최적 임베디드 모델 도출 (Inst: 16KB, Data: 4KB @ 4-Way).
           </div>
         </div>
       </div>
@@ -677,13 +390,12 @@
         <span class="tag">Verilog HDL</span><span class="tag">C / Assembly</span>
         <span class="tag">VCS &amp; Verdi</span><span class="tag">Vivado</span>
         <span class="tag accent">RISC-V RV32I</span><span class="tag accent">Cache Controller</span>
-        <span class="tag">AMBA AHB-Lite</span><span class="tag">AMBA APB</span>
-        <span class="tag">Nexys A7</span><span class="tag">Dhrystone / Coremark</span>
+        <span class="tag">AMBA AHB-Lite</span><span class="tag">Nexys A7</span>
       </div>
       <div class="project-contrib">
-        → CPU설계 수업 조교: 강의자료 및 RISC-V RV32I 스켈레톤 코드/검증 테스트 벡터 제작<br>
         → 대한전기학회 제 14회 작품경진대회 최우수상<br>
-        → 반도체공학회 학술 논문 1편 / 전자공학회 학술 저널 1편 (KCI 우수 등재)
+        → 반도체공학회 학술 논문 1편 / 전자공학회 학술 저널 1편 (KCI 우수 등재)<br>
+        → CPU설계 수업 조교: 강의자료 및 RISC-V RV32I 스켈레톤 코드 / 검증 테스트 벡터 제작
       </div>
     </div>
 
@@ -698,9 +410,8 @@
     <div class="section-line"></div>
   </div>
 
-  <p class="sub-label" style="margin-bottom:1.5rem;">국제 저널</p>
+  <span class="sub-label">국제 저널</span>
   <div class="pub-list" style="margin-bottom:2.5rem;">
-
     <div class="pub-item fade-up">
       <span class="pub-badge review">Under<br>Review</span>
       <div>
@@ -710,7 +421,6 @@
       </div>
       <div class="pub-author">제 2저자</div>
     </div>
-
     <div class="pub-item fade-up">
       <span class="pub-badge domestic">국내<br>저널</span>
       <div>
@@ -719,12 +429,10 @@
       </div>
       <div class="pub-author">제 3저자</div>
     </div>
-
   </div>
 
-  <p class="sub-label" style="margin-bottom:1.5rem;">국제 학회 (IEEE)</p>
+  <span class="sub-label">국제 학회 (IEEE 등재)</span>
   <div class="pub-list" style="margin-bottom:2.5rem;">
-
     <div class="pub-item fade-up">
       <span class="pub-badge ieee">IEEE<br>ICCE-Asia</span>
       <div>
@@ -734,7 +442,6 @@
       </div>
       <div class="pub-author">제 1저자</div>
     </div>
-
     <div class="pub-item fade-up">
       <span class="pub-badge ieee">IEEE<br>ITC-CSCC</span>
       <div>
@@ -744,7 +451,6 @@
       </div>
       <div class="pub-author">제 1저자</div>
     </div>
-
     <div class="pub-item fade-up">
       <span class="pub-badge ieee">IEEE<br>ICMRE</span>
       <div>
@@ -754,12 +460,10 @@
       </div>
       <div class="pub-author">제 1저자</div>
     </div>
-
   </div>
 
-  <p class="sub-label" style="margin-bottom:1.5rem;">국내 학술지 / 학회</p>
+  <span class="sub-label">국내 학술지 / 학회</span>
   <div class="pub-list">
-
     <div class="pub-item fade-up">
       <span class="pub-badge domestic">KCI<br>우수등재</span>
       <div>
@@ -768,7 +472,6 @@
       </div>
       <div class="pub-author">제 1저자</div>
     </div>
-
     <div class="pub-item fade-up">
       <span class="pub-badge domestic">국내<br>학회</span>
       <div>
@@ -778,7 +481,6 @@
       </div>
       <div class="pub-author">제 1저자</div>
     </div>
-
     <div class="pub-item fade-up">
       <span class="pub-badge domestic">대한<br>전기학회</span>
       <div>
@@ -788,7 +490,6 @@
       </div>
       <div class="pub-author">제 1저자</div>
     </div>
-
   </div>
 </section>
 
@@ -801,9 +502,8 @@
   </div>
 
   <div class="activities-grid">
-    <!-- 석사 조교 -->
     <div>
-      <p class="sub-label">석사 · 조교 활동</p>
+      <span class="sub-label">석사 · 조교 활동</span>
       <div class="timeline fade-up">
         <div class="timeline-item">
           <div class="timeline-period">2025.12 – 2026.01</div>
@@ -813,7 +513,7 @@
         <div class="timeline-item">
           <div class="timeline-period">2025.06 – 2025.07</div>
           <div class="timeline-title">교내 경진대회 총괄</div>
-          <div class="timeline-sub">제 3회 성균관대학교 자율주행 경진대회<br>〈자율주행 AI칩 설계 경진대회〉</div>
+          <div class="timeline-sub">제 3회 성균관대학교 자율주행 경진대회 〈자율주행 AI칩 설계 경진대회〉</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2025.03 – 2025.06</div>
@@ -833,9 +533,8 @@
       </div>
     </div>
 
-    <!-- 학부 활동 -->
     <div>
-      <p class="sub-label">학부 · 활동</p>
+      <span class="sub-label">학부 · 활동</span>
       <div class="timeline fade-up">
         <div class="timeline-item">
           <div class="timeline-period">2023.09 – 2023.12</div>
@@ -846,6 +545,21 @@
           <div class="timeline-period">2023.06 – 2023.08</div>
           <div class="timeline-title">부트캠프 총괄</div>
           <div class="timeline-sub">2023 피어오름 여름 Verilog HDL 부트캠프</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2023.03 – 2023.06</div>
+          <div class="timeline-title">팀 프로젝트 — 전공소모임 팀장</div>
+          <div class="timeline-sub">총 3인 구성 / 주제: FPGA 기반 사칙연산기 구현 및 UART를 통한 검증</div>
+          <div class="team-proj-box">
+            <div class="team-proj-row">
+              <span class="lbl">역할</span>
+              <span>Booth's Algorithm 곱셈기 및 비복원 나눗셈기 RTL 설계, 시리얼 통신 검증용 소프트웨어(C++) 구현</span>
+            </div>
+            <div class="team-proj-row">
+              <span class="lbl">성과</span>
+              <span>교내 프로그램 우수자 장학금 수혜</span>
+            </div>
+          </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2023.03 – 2024.02</div>
@@ -862,7 +576,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-name">HoBin Oh</div>
   <div class="footer-info">
@@ -875,25 +588,10 @@
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      }
+      if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
-          fill.style.animation = 'none';
-          fill.offsetHeight;
-          fill.style.animation = 'fillBar 1.5s ease forwards';
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.about-skills').forEach(el => skillObserver.observe(el));
 </script>
 </body>
 </html>
