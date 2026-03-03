@@ -8,15 +8,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --bg2: #111111;
-      --bg3: #1a1a1a;
-      --line: #2a2a2a;
-      --accent: #00ff9d;
-      --accent2: #0066ff;
-      --text: #e8e8e8;
-      --text2: #888;
-      --text3: #555;
+      --bg: #f7f9fc;
+      --bg2: #ffffff;
+      --bg3: #eef3fb;
+      --line: #d0dff0;
+      --accent: #4a90d9;
+      --accent2: #7ab8f5;
+      --text: #1a2a3a;
+      --text2: #4a6080;
+      --text3: #8aa0bb;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -51,7 +51,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 3rem;
-      background: rgba(10,10,10,0.85);
+      background: rgba(247,249,252,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
@@ -669,9 +669,8 @@
       <h1 class="hero-name">오호빈</h1>
       <p class="hero-name-en">HoBin Oh</p>
       <p class="hero-desc">
-        FPGA·SoC 기반 하드웨어 설계 엔지니어.<br>
-        자율주행, AI 가속기, 프로세서 아키텍처 분야의
-        RTL 설계 및 연구를 수행합니다.
+        FPGA Zynq 기반 하드웨어 설계 엔지니어.<br>
+        영상처리와 AI 가속기 설계 연구를 수행합니다.
       </p>
       <div class="hero-traits">
         <span class="hero-trait"><span>—</span> 데드라인을 철저히 지킵니다.</span>
@@ -680,7 +679,7 @@
       </div>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="mailto:hobin0676@daum.net" class="btn btn-secondary">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#573f38353e3967616061173336223a79393223" class="btn btn-secondary">Contact</a>
       </div>
     </div>
 
@@ -706,7 +705,7 @@
       <div class="hero-contact">
         <div class="contact-row">
           <span class="label">EMAIL</span>
-          <span class="value"><a href="mailto:hobin0676@daum.net">hobin0676@daum.net</a></span>
+          <span class="value"><a href="/cdn-cgi/l/email-protection#31595e53585f01070607715550445c1f5f5445"><span class="__cf_email__" data-cfemail="e58d8a878c8bd5d3d2d3a581849088cb8b8091">[email&#160;protected]</span></a></span>
         </div>
         <div class="contact-row">
           <span class="label">TEL</span>
@@ -1070,13 +1069,13 @@
   <footer>
     <div class="footer-name">HoBin Oh</div>
     <div class="footer-info">
-      <p><a href="mailto:hobin0676@daum.net">hobin0676@daum.net</a></p>
+      <p><a href="/cdn-cgi/l/email-protection#30585f52595e00060706705451455d1e5e5544"><span class="__cf_email__" data-cfemail="4820272a2126787e7f7e082c293d2566262d3c">[email&#160;protected]</span></a></p>
       <p>010-7607-0676</p>
       <p style="margin-top:0.5rem; color:var(--text3);">© 2026 HoBin Oh. All rights reserved.</p>
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Intersection Observer for fade-up
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -1093,17 +1092,4 @@
     // Skill bar animation on scroll
     const skillObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.skill-fill').forEach(fill => {
-            fill.style.animation = 'none';
-            fill.offsetHeight;
-            fill.style.animation = 'fillBar 1.5s ease forwards';
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll('.about-skills').forEach(el => skillObserver.observe(el));
-  </script>
-</body>
-</html>
+        if (e
