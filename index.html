@@ -8,19 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f9fc;
+      --bg: #f4f8fd;
       --bg2: #ffffff;
-      --bg3: #eef3fb;
-      --line: #d0dff0;
-      --accent: #4a90d9;
-      --accent2: #7ab8f5;
-      --text: #1a2a3a;
+      --bg3: #e8f0fa;
+      --line: #c8d8ee;
+      --accent: #3a7bd5;
+      --accent2: #6aabf7;
+      --text: #1a2a40;
       --text2: #4a6080;
       --text3: #8aa0bb;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -29,17 +28,6 @@
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 300;
       overflow-x: hidden;
-    }
-
-    /* NOISE OVERLAY */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.3;
     }
 
     /* NAV */
@@ -51,11 +39,10 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 3rem;
-      background: rgba(247,249,252,0.92);
+      background: rgba(244,248,253,0.93);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
-
     .nav-logo {
       font-family: 'Space Mono', monospace;
       font-size: 0.8rem;
@@ -63,13 +50,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: 'Space Mono', monospace;
       font-size: 0.7rem;
@@ -79,7 +60,6 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--accent); }
 
     /* HERO */
@@ -91,556 +71,272 @@
       position: relative;
       overflow: hidden;
     }
-
     .hero-grid-bg {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-image:
         linear-gradient(var(--line) 1px, transparent 1px),
         linear-gradient(90deg, var(--line) 1px, transparent 1px);
       background-size: 60px 60px;
-      opacity: 0.3;
+      opacity: 0.4;
       pointer-events: none;
     }
-
     .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 5rem 3rem 5rem 5rem;
-      position: relative;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 3rem 5rem 5rem; position: relative;
     }
-
     .hero-tag {
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 0.7rem; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase;
       margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
     }
-
     .hero-tag::before {
-      content: '';
-      display: block;
-      width: 30px;
-      height: 1px;
-      background: var(--accent);
+      content: ''; display: block;
+      width: 30px; height: 1px; background: var(--accent);
     }
-
     .hero-name {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(3rem, 6vw, 5.5rem);
-      line-height: 1.05;
-      font-weight: 400;
-      margin-bottom: 0.3rem;
-      letter-spacing: -0.02em;
+      line-height: 1.05; font-weight: 400;
+      margin-bottom: 0.3rem; letter-spacing: -0.02em; color: var(--text);
     }
-
     .hero-name-en {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(1.5rem, 3vw, 2.5rem);
-      color: var(--text2);
-      font-style: italic;
-      margin-bottom: 2rem;
+      color: var(--text2); font-style: italic; margin-bottom: 2rem;
     }
-
     .hero-desc {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text2);
+      font-size: 1rem; line-height: 1.8; color: var(--text2);
       max-width: 420px;
-      border-left: 2px solid var(--accent);
-      padding-left: 1.2rem;
+      border-left: 2px solid var(--accent); padding-left: 1.2rem;
       margin-bottom: 3rem;
     }
-
-    .hero-traits {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 3rem;
-    }
-
+    .hero-traits { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 3rem; }
     .hero-trait {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--text3);
+      font-size: 0.72rem; color: var(--text3);
       letter-spacing: 0.05em;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
     }
-
-    .hero-trait span {
-      color: var(--accent);
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-    }
-
+    .hero-trait span { color: var(--accent); }
+    .hero-cta { display: flex; gap: 1rem; }
     .btn {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.8rem 1.8rem;
-      border: 1px solid;
-      text-decoration: none;
-      transition: all 0.25s;
-      cursor: pointer;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.8rem 1.8rem; border: 1px solid;
+      text-decoration: none; transition: all 0.25s; cursor: pointer;
     }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
-    }
-
-    .btn-primary:hover {
-      background: transparent;
-      color: var(--accent);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text2);
-      border-color: var(--line);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--text2);
-      color: var(--text);
-    }
+    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-secondary { background: transparent; color: var(--text2); border-color: var(--line); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
     .hero-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 5rem 5rem 5rem 3rem;
-      position: relative;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 5rem 5rem 5rem 3rem; position: relative;
     }
-
     .hero-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      width: 100%;
-      max-width: 400px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); width: 100%; max-width: 400px;
     }
-
-    .stat-box {
-      background: var(--bg2);
-      padding: 1.8rem;
-      transition: background 0.2s;
-    }
-
+    .stat-box { background: var(--bg2); padding: 1.8rem; transition: background 0.2s; }
     .stat-box:hover { background: var(--bg3); }
-
     .stat-num {
       font-family: 'DM Serif Display', serif;
-      font-size: 2.8rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.4rem;
+      font-size: 2.8rem; color: var(--accent); line-height: 1; margin-bottom: 0.4rem;
     }
-
     .stat-label {
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text3);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.65rem; color: var(--text3);
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
-
     .hero-contact {
-      margin-top: 1.5rem;
-      width: 100%;
-      max-width: 400px;
-      border: 1px solid var(--line);
-      background: var(--bg2);
-      padding: 1.2rem 1.8rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
+      margin-top: 1.5rem; width: 100%; max-width: 400px;
+      border: 1px solid var(--line); background: var(--bg2);
+      padding: 1.4rem 1.8rem;
+      display: flex; flex-direction: column; gap: 0.9rem;
     }
-
-    .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .contact-info-row { display: flex; flex-direction: column; gap: 0.2rem; }
+    .contact-info-label {
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.6rem; color: var(--text3);
+      letter-spacing: 0.12em; text-transform: uppercase;
     }
-
-    .contact-row .label { color: var(--text3); }
-    .contact-row .value { color: var(--text2); }
-    .contact-row .value a { color: var(--accent); text-decoration: none; }
+    .contact-info-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; color: var(--text);
+    }
+    .contact-info-value a { color: var(--accent); text-decoration: none; }
+    .contact-divider { width: 100%; height: 1px; background: var(--line); }
+    .contact-status {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem; color: var(--accent);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
     /* SECTIONS */
-    section {
-      padding: 8rem 5rem;
-      border-top: 1px solid var(--line);
-    }
-
+    section { padding: 8rem 5rem; border-top: 1px solid var(--line); }
     .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 5rem;
+      display: flex; align-items: center; gap: 1.5rem; margin-bottom: 5rem;
     }
-
     .section-num {
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
+      font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em;
     }
-
     .section-title {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; color: var(--text);
     }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--line);
-    }
+    .section-line { flex: 1; height: 1px; background: var(--line); }
 
     /* ABOUT */
-    #about .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-    }
-
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
     .edu-item {
-      padding: 2rem;
-      border: 1px solid var(--line);
-      background: var(--bg2);
-      position: relative;
-      transition: border-color 0.2s;
+      padding: 2rem; border: 1px solid var(--line); background: var(--bg2);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
-    .edu-item:hover { border-color: var(--accent); }
-
-    .edu-year {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
+    .edu-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(58,123,213,0.08);
     }
+    .edu-year { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent); margin-bottom: 0.6rem; }
+    .edu-school { font-size: 1rem; font-weight: 500; margin-bottom: 0.3rem; color: var(--text); }
+    .edu-dept { font-size: 0.85rem; color: var(--text2); margin-bottom: 0.5rem; }
+    .edu-gpa { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--accent); }
 
-    .edu-school {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
-
-    .edu-dept {
-      font-size: 0.85rem;
-      color: var(--text2);
-      margin-bottom: 0.5rem;
-    }
-
-    .edu-gpa {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--accent);
-    }
-
-    .about-skills {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .skill-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
+    .about-skills { display: flex; flex-direction: column; gap: 1rem; }
+    .skill-row { display: flex; align-items: center; gap: 1rem; }
     .skill-name {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--text2);
-      width: 140px;
-      flex-shrink: 0;
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      color: var(--text2); width: 140px; flex-shrink: 0;
     }
-
-    .skill-bar {
-      flex: 1;
-      height: 3px;
-      background: var(--line);
-      position: relative;
-      overflow: hidden;
-    }
-
+    .skill-bar { flex: 1; height: 3px; background: var(--line); overflow: hidden; }
     .skill-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform-origin: left;
+      transform-origin: left; transform: scaleX(0);
       animation: fillBar 1.5s ease forwards;
-      transform: scaleX(0);
     }
-
-    @keyframes fillBar {
-      to { transform: scaleX(1); }
-    }
+    @keyframes fillBar { to { transform: scaleX(1); } }
 
     /* PROJECTS */
-    #projects .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--line); border: 1px solid var(--line);
     }
-
     .project-card {
-      background: var(--bg2);
-      padding: 2.5rem;
-      position: relative;
-      transition: background 0.25s;
-      overflow: hidden;
-      cursor: pointer;
+      background: var(--bg2); padding: 2.5rem;
+      position: relative; transition: background 0.25s; overflow: hidden;
     }
-
     .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 0;
-      background: var(--accent);
-      transition: height 0.3s ease;
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; background: var(--accent); transition: height 0.3s;
     }
-
     .project-card:hover { background: var(--bg3); }
     .project-card:hover::before { height: 100%; }
-
-    .project-period {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--text3);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.8rem;
-    }
-
-    .project-title {
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-
-    .project-desc {
-      font-size: 0.82rem;
-      color: var(--text2);
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
+    .project-period { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--text3); margin-bottom: 0.8rem; }
+    .project-title { font-size: 1rem; font-weight: 500; line-height: 1.4; margin-bottom: 1rem; color: var(--text); }
+    .project-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.2rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--line);
-      color: var(--text3);
-      letter-spacing: 0.05em;
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      padding: 0.3rem 0.7rem; border: 1px solid var(--line);
+      color: var(--text3); background: var(--bg);
     }
-
-    .tag.accent { border-color: var(--accent); color: var(--accent); }
-
+    .tag.accent { border-color: var(--accent2); color: var(--accent); background: #ebf3fd; }
     .project-contrib {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.78rem;
-      color: var(--accent);
-      font-style: italic;
-      line-height: 1.5;
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line);
+      font-size: 0.78rem; color: var(--accent); font-style: italic; line-height: 1.6;
     }
 
     /* PUBLICATIONS */
-    #publications .pub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
+    .pub-list {
+      display: flex; flex-direction: column;
+      gap: 1px; background: var(--line); border: 1px solid var(--line);
     }
-
     .pub-item {
-      background: var(--bg2);
-      padding: 2rem 2.5rem;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 2rem;
-      align-items: start;
-      transition: background 0.2s;
+      background: var(--bg2); padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 2rem; align-items: start; transition: background 0.2s;
     }
-
     .pub-item:hover { background: var(--bg3); }
-
     .pub-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      padding: 0.3rem 0.6rem;
-      border: 1px solid;
-      text-align: center;
-      line-height: 1.3;
-      white-space: nowrap;
-      align-self: start;
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      padding: 0.3rem 0.6rem; border: 1px solid;
+      text-align: center; line-height: 1.4; white-space: nowrap; align-self: start;
     }
-
-    .pub-badge.ieee { border-color: var(--accent2); color: var(--accent2); }
-    .pub-badge.domestic { border-color: var(--text3); color: var(--text3); }
-    .pub-badge.review { border-color: #ff9900; color: #ff9900; }
-
-    .pub-title {
-      font-size: 0.9rem;
-      font-weight: 500;
-      line-height: 1.5;
-      margin-bottom: 0.3rem;
-    }
-
-    .pub-venue {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text3);
-    }
-
-    .pub-author {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--accent);
-      white-space: nowrap;
-    }
+    .pub-badge.ieee { border-color: var(--accent); color: var(--accent); background: #ebf3fd; }
+    .pub-badge.domestic { border-color: var(--text3); color: var(--text3); background: #f5f7fa; }
+    .pub-badge.review { border-color: #e8a020; color: #c07800; background: #fff8eb; }
+    .pub-title { font-size: 0.9rem; font-weight: 500; line-height: 1.6; margin-bottom: 0.4rem; color: var(--text); }
+    .pub-venue { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); margin-bottom: 0.2rem; }
+    .pub-note { font-size: 0.75rem; color: var(--text2); margin-top: 0.3rem; }
+    .pub-author { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent); white-space: nowrap; font-weight: 700; }
 
     /* ACTIVITIES */
-    #activities .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
+    .activities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .timeline { position: relative; padding-left: 2rem; }
     .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--line);
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--line);
     }
-
-    .timeline-item {
-      position: relative;
-      padding: 0 0 2.5rem 2.5rem;
-      margin-left: 0;
-    }
-
+    .timeline-item { position: relative; padding: 0 0 2.2rem 2.5rem; }
     .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -4px;
-      top: 6px;
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
+      content: ''; position: absolute; left: -4px; top: 6px;
+      width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
     }
-
-    .timeline-period {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      margin-bottom: 0.2rem;
-    }
-
-    .timeline-sub {
-      font-size: 0.8rem;
-      color: var(--text2);
-    }
+    .timeline-period { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent); margin-bottom: 0.3rem; }
+    .timeline-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; color: var(--text); }
+    .timeline-sub { font-size: 0.8rem; color: var(--text2); line-height: 1.5; }
 
     /* FOOTER */
     footer {
-      padding: 4rem 5rem;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 4rem 5rem; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg2);
     }
-
-    .footer-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2rem;
-      color: var(--text3);
-    }
-
-    .footer-info {
-      text-align: right;
-    }
-
-    .footer-info p {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--text3);
-      margin-bottom: 0.3rem;
-    }
-
+    .footer-name { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--text3); }
+    .footer-info { text-align: right; }
+    .footer-info p { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text3); margin-bottom: 0.3rem; }
     .footer-info a { color: var(--accent); text-decoration: none; }
 
-    /* ANIMATIONS */
+    /* SECTION LABEL */
+    .sub-label {
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* FADE */
     .fade-up {
-      opacity: 0;
-      transform: translateY(20px);
+      opacity: 0; transform: translateY(20px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--line); }
     ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
+      .nav-links { gap: 1.2rem; }
       #hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 7rem 1.5rem 2rem; }
       .hero-right { padding: 2rem 1.5rem 4rem; }
       section { padding: 5rem 1.5rem; }
-      #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      #projects .projects-grid { grid-template-columns: 1fr; }
+      .about-grid, .activities-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
       .pub-item { grid-template-columns: 1fr; gap: 0.8rem; }
       footer { flex-direction: column; gap: 1.5rem; text-align: center; }
       .footer-info { text-align: center; }
@@ -649,447 +345,555 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">HoBin Oh</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#publications">Papers</a></li>
-      <li><a href="#activities">Activities</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HoBin Oh</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Papers</a></li>
+    <li><a href="#activities">Activities</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-grid-bg"></div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-left">
+    <div class="hero-tag">RTL Design Engineer</div>
+    <h1 class="hero-name">오호빈</h1>
+    <p class="hero-name-en">HoBin Oh</p>
+    <p class="hero-desc">
+      FPGA Zynq 기반 하드웨어 설계 엔지니어.<br>
+      영상처리와 AI 가속기 설계 연구를 수행합니다.
+    </p>
+    <div class="hero-traits">
+      <span class="hero-trait"><span>—</span> 데드라인을 철저히 지킵니다.</span>
+      <span class="hero-trait"><span>—</span> 빠른 적응력으로 어떤 환경이든 자연스럽게 녹아듭니다.</span>
+      <span class="hero-trait"><span>—</span> 계획한 것은 반드시 결과로 도출해냅니다.</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="mailto:hobin0676@daum.net" class="btn btn-secondary">Contact</a>
+    </div>
+  </div>
 
-    <div class="hero-left">
-      <div class="hero-tag">RTL Design Engineer</div>
-      <h1 class="hero-name">오호빈</h1>
-      <p class="hero-name-en">HoBin Oh</p>
-      <p class="hero-desc">
-        FPGA Zynq 기반 하드웨어 설계 엔지니어.<br>
-        영상처리와 AI 가속기 설계 연구를 수행합니다.
-      </p>
-      <div class="hero-traits">
-        <span class="hero-trait"><span>—</span> 데드라인을 철저히 지킵니다.</span>
-        <span class="hero-trait"><span>—</span> 빠른 적응력으로 어떤 환경이든 자연스럽게 녹아듭니다.</span>
-        <span class="hero-trait"><span>—</span> 계획한 것은 반드시 결과로 도출해냅니다.</span>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Research Projects</div>
       </div>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="/cdn-cgi/l/email-protection#573f38353e3967616061173336223a79393223" class="btn btn-secondary">Contact</a>
+      <div class="stat-box">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Publications</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4.5</div>
+        <div class="stat-label">Major GPA / 4.5</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4×</div>
+        <div class="stat-label">IEEE Papers</div>
+      </div>
+    </div>
+    <div class="hero-contact">
+      <div class="contact-info-row">
+        <span class="contact-info-label">E-Mail</span>
+        <span class="contact-info-value"><a href="mailto:hobin0676@daum.net">hobin0676@daum.net</a></span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-info-row">
+        <span class="contact-info-label">Tel</span>
+        <span class="contact-info-value">010-7607-0676</span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-status">
+        <div class="status-dot"></div>
+        성균관대학교 석사과정 재학 중
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-grid">
+    <!-- 왼쪽: 학력 + 수상/자격 -->
+    <div>
+      <p class="sub-label">Education</p>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem;">
+        <div class="edu-item fade-up">
+          <div class="edu-year">2024.08 – 2026.08 (졸업 예정)</div>
+          <div class="edu-school">성균관대학교</div>
+          <div class="edu-dept">전자전기컴퓨터공학과 석사과정</div>
+          <div class="edu-gpa">GPA 4.0 / 4.5</div>
+        </div>
+        <div class="edu-item fade-up">
+          <div class="edu-year">2021.03 – 2024.08</div>
+          <div class="edu-school">상명대학교 천안캠퍼스</div>
+          <div class="edu-dept">시스템반도체공학과 학사 (졸업)</div>
+          <div class="edu-gpa">GPA 4.33 / 4.5 &nbsp;|&nbsp; 전공 GPA 4.5 / 4.5</div>
+        </div>
+      </div>
+
+      <p class="sub-label">Awards &amp; Certifications</p>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
+        <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
+          <div class="edu-year">2023.12</div>
+          <div class="edu-school" style="font-size:0.9rem;">대한전기학회 제 14회 대학생 작품경진대회 최우수상</div>
+          <div class="edu-dept" style="font-size:0.78rem;margin-top:0.3rem;">RISC-V RV32I 파이프라인 프로세서 및 주변장치 FPGA 검증</div>
+        </div>
+        <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
+          <div class="edu-year">2023.09</div>
+          <div class="edu-school" style="font-size:0.9rem;">리눅스마스터 2급</div>
+        </div>
+        <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
+          <div class="edu-year">2021.04</div>
+          <div class="edu-school" style="font-size:0.9rem;">운전면허증 (1종 보통)</div>
+        </div>
+      </div>
+
+      <p class="sub-label">1저자 논문 현황</p>
+      <div class="edu-item fade-up" style="padding:1.4rem 1.8rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem 1.5rem;">
+          <div>
+            <div class="edu-year" style="margin-bottom:0.2rem;">국내 학회</div>
+            <div style="font-size:0.85rem;font-weight:500;">2편</div>
+            <div style="font-size:0.75rem;color:var(--text2);">대한전기학회, 반도체공학회</div>
+          </div>
+          <div>
+            <div class="edu-year" style="margin-bottom:0.2rem;">국내 저널</div>
+            <div style="font-size:0.85rem;font-weight:500;">2편</div>
+            <div style="font-size:0.75rem;color:var(--text2);">전자공학회, 반도체디스플레이기술학회</div>
+          </div>
+          <div>
+            <div class="edu-year" style="margin-bottom:0.2rem;">국제 학회 (IEEE)</div>
+            <div style="font-size:0.85rem;font-weight:500;">3편</div>
+            <div style="font-size:0.75rem;color:var(--text2);">ICCE-Asia, ITC-CSCC, ICMRE</div>
+          </div>
+          <div>
+            <div class="edu-year" style="margin-bottom:0.2rem;">국제 저널</div>
+            <div style="font-size:0.85rem;font-weight:500;">1편 작성 중</div>
+            <div style="font-size:0.75rem;color:var(--text2);">IEEE Access (준비 중)</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="hero-right">
-      <div class="hero-stats">
-        <div class="stat-box">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Research Projects</div>
+    <!-- 오른쪽: 기술스택 + 연구분야 -->
+    <div>
+      <p class="sub-label">Technical Skills</p>
+      <div class="about-skills fade-up" style="margin-bottom:2.5rem;">
+        <div class="skill-row">
+          <span class="skill-name">Verilog HDL</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
         </div>
-        <div class="stat-box">
-          <div class="stat-num">8+</div>
-          <div class="stat-label">Publications</div>
+        <div class="skill-row">
+          <span class="skill-name">Vivado / Vitis-AI</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
         </div>
-        <div class="stat-box">
-          <div class="stat-num">4.5</div>
-          <div class="stat-label">Major GPA / 4.5</div>
+        <div class="skill-row">
+          <span class="skill-name">FPGA 설계</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
         </div>
-        <div class="stat-box">
-          <div class="stat-num">3×</div>
-          <div class="stat-label">IEEE Papers</div>
+        <div class="skill-row">
+          <span class="skill-name">AXI / AMBA Bus</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">RTL 시뮬레이션</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Python</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">C / Assembly</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">VCS &amp; Verdi</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
         </div>
       </div>
-      <div class="hero-contact">
-        <div class="contact-row">
-          <span class="label">EMAIL</span>
-          <span class="value"><a href="/cdn-cgi/l/email-protection#31595e53585f01070607715550445c1f5f5445"><span class="__cf_email__" data-cfemail="e58d8a878c8bd5d3d2d3a581849088cb8b8091">[email&#160;protected]</span></a></span>
-        </div>
-        <div class="contact-row">
-          <span class="label">TEL</span>
-          <span class="value">010-7607-0676</span>
-        </div>
-        <div class="contact-row">
-          <span class="label">LOCATION</span>
-          <span class="value">경기도 화성시</span>
-        </div>
-        <div class="contact-row">
-          <span class="label">STATUS</span>
-          <span class="value" style="color: var(--accent);">● 석사과정 재학 중</span>
-        </div>
+
+      <p class="sub-label">Research Areas</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem;" class="fade-up">
+        <span class="tag accent">FPGA / SoC 설계</span>
+        <span class="tag accent">AI 가속기</span>
+        <span class="tag accent">영상처리 가속</span>
+        <span class="tag accent">자율주행 아키텍처</span>
+        <span class="tag">RISC-V 프로세서</span>
+        <span class="tag">Cache Controller</span>
+        <span class="tag">RTL 설계</span>
+        <span class="tag">산업용 통신 (EtherCAT)</span>
+        <span class="tag">ASIC 설계</span>
+      </div>
+
+      <p class="sub-label">Tools &amp; Environment</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" class="fade-up">
+        <span class="tag">Vivado</span>
+        <span class="tag">Vitis-AI</span>
+        <span class="tag">VCS &amp; Verdi</span>
+        <span class="tag">FINN</span>
+        <span class="tag">Xilinx Zynq</span>
+        <span class="tag">Ultra96-V2</span>
+        <span class="tag">Nexys A7</span>
+        <span class="tag">Linux</span>
+        <span class="tag">Git</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2 class="section-title">About</h2>
-      <div class="section-line"></div>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card fade-up">
+      <div class="project-period">2025.01 – 2026.01.16</div>
+      <div class="project-title">Zynq기반 서라운드 뷰 및 AI 가속기 통합 아키텍처</div>
+      <div class="project-desc">
+        HD 해상도 4채널 카메라(1280×720)를 896×1024 단채널 서라운드 뷰로 합성하고, FINN기반 Mobilenet v1 백본의 FCN-32s 가속기를 통합.
+        어안왜곡 보정 파라미터를 PS에서 SW로 동적 제어하여 LUT 기반 방식 대비 유연성 향상.
+        온칩 메모리 최적화로 DDR 대역폭 대폭 절감. End-to-End ≈ 32fps 달성.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Verilog HDL</span><span class="tag">Python</span>
+        <span class="tag">Vivado</span><span class="tag accent">FINN</span>
+        <span class="tag accent">Zynq SoC</span><span class="tag">MIPI CSI-2</span>
+        <span class="tag">AXI4-Stream</span>
+      </div>
+      <div class="project-contrib">
+        → PL에서 특징맵만 추출 후 PS에서 업샘플링 → PL-PS 전달 지연 최소화<br>
+        → Skip-Connection 없는 FCN-32s 채택으로 하드웨어 구현 친화적 설계
+      </div>
     </div>
 
-    <div class="about-grid">
+    <!-- Project 2 -->
+    <div class="project-card fade-up">
+      <div class="project-period">2024.09 – 2024.12.27</div>
+      <div class="project-title">Vitis-AI DPU를 활용한 자율주행 아키텍처</div>
+      <div class="project-desc">
+        Zynq 기반 초음파 센서 모듈, 모터드라이버 PWM IP, Vitis-AI DPU 통합 아키텍처 개발.
+        YOLOv3 모델 학습 → ONNX Export → 양자화 → 학습 가중치 컴파일 → Vitis-AI DPU 통합 추론 및 주행.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Verilog HDL</span><span class="tag">Python</span>
+        <span class="tag">Vitis-AI</span><span class="tag accent">YOLOv3</span>
+        <span class="tag accent">Zynq (Ultra96-V2)</span><span class="tag">PWM IP</span>
+      </div>
+      <div class="project-contrib">
+        → 2024/2025 교내 동계 단기강좌 〈자율주행 AI칩 설계〉 진행<br>
+        → 제 3회 성균관대학교 자율주행 경진대회 총괄 진행<br>
+        → IEEE Transactions on Intelligent Vehicles (SCIE, IF=14.3) 투고 (2저자)
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card fade-up">
+      <div class="project-period">2025.12 – 현재 (진행 중)</div>
+      <div class="project-title">산업용 고속 백플레인 통신 슬레이브 모듈</div>
+      <div class="project-desc">
+        EtherCAT 기반 백플레인 on-the-fly 통신 슬레이브 컨트롤러 설계.
+        저속 백플레인: LVDS PHY + 온칩 오버샘플링 CDR.
+        고속 백플레인: Transceiver PHY + PHY 내부 CDR + 온칩 디지털 신호 처리.
+        RTL 설계 완료 후 FPGA 검증, 펨리스 업체 통해 ASIC 제작 예정.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Verilog HDL</span><span class="tag">Vivado</span>
+        <span class="tag accent">EtherCAT</span><span class="tag accent">ASIC 예정</span>
+        <span class="tag">LVDS PHY</span><span class="tag">Transceiver PHY</span>
+        <span class="tag">CDR</span>
+      </div>
+      <div class="project-contrib">
+        → YASKAWA 산업 표준 기반 슬레이브 컨트롤러<br>
+        → @ EtherCAT Technology Group 표준 적용
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card fade-up">
+      <div class="project-period">2024.08.05 – 2024.09.13</div>
+      <div class="project-title">영상처리기반 자율주행을 위한 전처리 가속기</div>
+      <div class="project-desc">
+        ROI &amp; Grayscale, Bird's Eye View Transformation, Gaussian Blur, Sobel 알고리즘을
+        PL 영역에서 AXI-Stream으로 처리하여 가속.
+        Ultra96-V2에서 Max Freq. 100MHz, VDMA 오버헤드 포함 평균 101FPS 달성.
+        PS 영역의 제어를 통해 실차 1/5 크기 전동차에서 자율주행 기능 검증.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Verilog HDL</span><span class="tag">Python</span>
+        <span class="tag">Vivado</span><span class="tag accent">Ultra96-V2</span>
+        <span class="tag">VDMA</span><span class="tag">BEV Transform</span>
+        <span class="tag">Sobel</span>
+      </div>
+      <div class="project-contrib">
+        → PS 처리 대비 실시간 1/5 시간 단축<br>
+        → FPGA 기반 영상처리 실시간성 입증, 환경 노이즈 한계 식별 → AI 기반 자율주행 도입 필요성 도출
+      </div>
+    </div>
+
+    <!-- Project 5 (wide) -->
+    <div class="project-card fade-up" style="grid-column: 1 / -1;">
+      <div class="project-period">2023.07.03 – 2024.07.31 &nbsp;|&nbsp; 학사 졸업연구</div>
+      <div class="project-title">[학사] FPGA를 이용한 RISC-V RV32I와 Cache 통합 설계</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.2rem;">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.5rem;text-transform:uppercase;">RISC-V RV32I Pipeline Processor</div>
+          <div class="project-desc" style="margin-bottom:0;">
+            RV32I 명령어 기반 5-Stage Pipeline 설계 및 Hazard Unit(FWD, Stall, Flush)으로 해저드 해결.
+            Native → AMBA APB → AMBA AHB-Lite Bus Protocol 설계를 통한 Bus Protocol 이해.
+            Xilinx Nexys A7 보드에서 Max Freq. 50MHz 구현.
+            Dhrystone, Coremark 벤치마크 동작 검증 및 성능 평가.
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);margin-bottom:0.5rem;text-transform:uppercase;">Cache Controller</div>
+          <div class="project-desc" style="margin-bottom:0;">
+            Direct Mapped / N-Way Set-Associative / Fully Associative Cache Controller 설계.
+            가상 SDRAM Controller 환경 구축, Dhrystone·Coremark 벤치마크 성능 평가.
+            구조별 Hit rate, Vivado 구현 결과 Power·하드웨어 자원 분석으로
+            최적 임베디드 모델 도출 (Inst: 16KB, Data: 4KB @ 4-Way).
+          </div>
+        </div>
+      </div>
+      <div class="project-tags">
+        <span class="tag">Verilog HDL</span><span class="tag">C / Assembly</span>
+        <span class="tag">VCS &amp; Verdi</span><span class="tag">Vivado</span>
+        <span class="tag accent">RISC-V RV32I</span><span class="tag accent">Cache Controller</span>
+        <span class="tag">AMBA AHB-Lite</span><span class="tag">AMBA APB</span>
+        <span class="tag">Nexys A7</span><span class="tag">Dhrystone / Coremark</span>
+      </div>
+      <div class="project-contrib">
+        → CPU설계 수업 조교: 강의자료 및 RISC-V RV32I 스켈레톤 코드/검증 테스트 벡터 제작<br>
+        → 대한전기학회 제 14회 작품경진대회 최우수상<br>
+        → 반도체공학회 학술 논문 1편 / 전자공학회 학술 저널 1편 (KCI 우수 등재)
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Publications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <p class="sub-label" style="margin-bottom:1.5rem;">국제 저널</p>
+  <div class="pub-list" style="margin-bottom:2.5rem;">
+
+    <div class="pub-item fade-up">
+      <span class="pub-badge review">Under<br>Review</span>
       <div>
-        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem;">Education</h3>
-        <div style="display:flex;flex-direction:column;gap:1rem;">
-          <div class="edu-item fade-up">
-            <div class="edu-year">2024.08 – 2026.08 (예정)</div>
-            <div class="edu-school">성균관대학교</div>
-            <div class="edu-dept">전자전기컴퓨터공학과 석사과정</div>
-            <div class="edu-gpa">GPA 4.0 / 4.5</div>
-          </div>
-          <div class="edu-item fade-up">
-            <div class="edu-year">2021.03 – 2024.08</div>
-            <div class="edu-school">상명대학교 천안캠퍼스</div>
-            <div class="edu-dept">시스템반도체공학과 학사</div>
-            <div class="edu-gpa">GPA 4.33 / 4.5 &nbsp;|&nbsp; 전공 4.5 / 4.5</div>
-          </div>
-        </div>
-
-        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-top:2.5rem; margin-bottom:1.5rem;">Awards & Certs</h3>
-        <div style="display:flex;flex-direction:column;gap:0.8rem;">
-          <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
-            <div class="edu-year">2023.12</div>
-            <div class="edu-school" style="font-size:0.88rem;">대한전기학회 제 14회 작품경진대회 최우수상</div>
-          </div>
-          <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
-            <div class="edu-year">2023.09</div>
-            <div class="edu-school" style="font-size:0.88rem;">리눅스마스터 2급</div>
-          </div>
-        </div>
+        <div class="pub-title">HeteroX: AI–SoC Based Educational Platform for Autonomous Vehicle Systems via Project-Based Learning and Competition</div>
+        <div class="pub-venue">IEEE Transactions on Intelligent Vehicles &nbsp;|&nbsp; SCIE, IF = 14.3</div>
+        <div class="pub-note">실험 총괄 진행</div>
       </div>
+      <div class="pub-author">제 2저자</div>
+    </div>
 
+    <div class="pub-item fade-up">
+      <span class="pub-badge domestic">국내<br>저널</span>
       <div>
-        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem;">Technical Skills</h3>
-        <div class="about-skills fade-up">
-          <div class="skill-row">
-            <span class="skill-name">Verilog HDL</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Vivado / Vitis-AI</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">FPGA 설계</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Python</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">RTL 시뮬레이션</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">C / Assembly</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">AXI / AMBA Bus</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">VCS & Verdi</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
-          </div>
-        </div>
-
-        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-top:2.5rem; margin-bottom:1.2rem;">Research Areas</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" class="fade-up">
-          <span class="tag accent">FPGA/SoC 설계</span>
-          <span class="tag accent">AI 가속기</span>
-          <span class="tag accent">자율주행 아키텍처</span>
-          <span class="tag">RISC-V 프로세서</span>
-          <span class="tag">Cache Controller</span>
-          <span class="tag">RTL 설계</span>
-          <span class="tag">영상처리 가속</span>
-          <span class="tag">산업용 통신</span>
-        </div>
+        <div class="pub-title">축적 컴퓨팅을 위한 멤리스터 소자의 최적화</div>
+        <div class="pub-venue">반도체디스플레이기술학회 &nbsp;|&nbsp; 국내 학술 저널</div>
       </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Projects</h2>
-      <div class="section-line"></div>
+      <div class="pub-author">제 3저자</div>
     </div>
 
-    <div class="projects-grid">
+  </div>
 
-      <div class="project-card fade-up">
-        <div class="project-period">2025.01 – 2026.01</div>
-        <div class="project-title">Zynq기반 서라운드 뷰 및 AI 가속기 통합 아키텍처</div>
-        <div class="project-desc">
-          HD 해상도 4채널 카메라 입력(1280×720)을 896×1024 단채널 서라운드 뷰로 합성하고, FINN기반 FCN-32s AI 가속기를 통합. End-to-End ≈ 32fps 달성.
-        </div>
-        <div class="project-tags">
-          <span class="tag">Verilog HDL</span>
-          <span class="tag">Python</span>
-          <span class="tag">Vivado</span>
-          <span class="tag accent">FINN</span>
-          <span class="tag accent">Zynq SoC</span>
-        </div>
-        <div class="project-contrib">
-          → DDR 대역폭 절감 / PL-PS 전달 지연 최소화 / LUT 효율 최적화
-        </div>
-      </div>
+  <p class="sub-label" style="margin-bottom:1.5rem;">국제 학회 (IEEE)</p>
+  <div class="pub-list" style="margin-bottom:2.5rem;">
 
-      <div class="project-card fade-up">
-        <div class="project-period">2024.09 – 2024.12</div>
-        <div class="project-title">Vitis-AI DPU를 활용한 자율주행 아키텍처</div>
-        <div class="project-desc">
-          Zynq 플랫폼에서 초음파 센서, PWM IP, Vitis-AI DPU를 통합. Yolo v3 모델 학습 → 양자화 → Vitis-AI DPU 통합 추론 파이프라인 구현.
-        </div>
-        <div class="project-tags">
-          <span class="tag">Verilog HDL</span>
-          <span class="tag">Python</span>
-          <span class="tag">Vitis-AI</span>
-          <span class="tag accent">YOLOv3</span>
-          <span class="tag accent">Zynq</span>
-        </div>
-        <div class="project-contrib">
-          → 2024/2025 교내 자율주행 단기강좌 진행 / 성균관대 자율주행 경진대회 총괄 / IEEE TIV 투고 (2저자)
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-period">2025.12 – 현재</div>
-        <div class="project-title">산업용 고속 백플레인 통신 슬레이브 모듈</div>
-        <div class="project-desc">
-          EtherCAT 기반 백플레인 통신 슬레이브 컨트롤러 설계. LVDS PHY (저속) 및 Transceiver PHY (고속) 이중 구성. RTL 완료 후 FPGA 검증 → ASIC 제작 예정.
-        </div>
-        <div class="project-tags">
-          <span class="tag">Verilog HDL</span>
-          <span class="tag">Vivado</span>
-          <span class="tag accent">EtherCAT</span>
-          <span class="tag accent">ASIC</span>
-          <span class="tag">LVDS PHY</span>
-        </div>
-        <div class="project-contrib">
-          → on-the-fly 방식 백플레인 통신 / YASKAWA 산업 표준 적용
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-period">2024.08 – 2024.09</div>
-        <div class="project-title">영상처리기반 자율주행을 위한 전처리 가속기</div>
-        <div class="project-desc">
-          ROI, Grayscale, BEV Transform, Gaussian Blur, Sobel 알고리즘을 PL 영역에서 Stream 처리. Ultra96-V2에서 100MHz, 평균 101FPS 달성.
-        </div>
-        <div class="project-tags">
-          <span class="tag">Verilog HDL</span>
-          <span class="tag">Python</span>
-          <span class="tag">Vivado</span>
-          <span class="tag accent">Ultra96-V2</span>
-          <span class="tag">VDMA</span>
-        </div>
-        <div class="project-contrib">
-          → PS 처리 대비 1/5 시간 단축 / AI 기반 자율주행 필요성 도출
-        </div>
-      </div>
-
-      <div class="project-card fade-up" style="grid-column: 1 / -1;">
-        <div class="project-period">2023.07 – 2024.07 &nbsp;|&nbsp; 학사 졸업연구</div>
-        <div class="project-title">[학사] FPGA를 이용한 RISC-V RV32I와 Cache 통합 설계</div>
-        <div class="project-desc">
-          RV32I 5-Stage Pipeline 프로세서 설계 (Hazard Unit: FWD/Stall/Flush), Native → AMBA APB → AHB-Lite Bus Protocol 구현, Dhrystone·Coremark 벤치마크 검증.
-          Direct Mapped / N-Way Set-Associative / Fully Associative Cache Controller 설계 및 최적 임베디드 모델 도출 (Inst: 16KB, Data: 4KB @ 4-Way).
-        </div>
-        <div class="project-tags">
-          <span class="tag">Verilog HDL</span>
-          <span class="tag">C / Assembly</span>
-          <span class="tag">VCS & Verdi</span>
-          <span class="tag">Vivado</span>
-          <span class="tag accent">RISC-V RV32I</span>
-          <span class="tag accent">Cache Controller</span>
-          <span class="tag">AMBA Bus</span>
-          <span class="tag">Nexys A7</span>
-        </div>
-        <div class="project-contrib">
-          → 대한전기학회 최우수상 / 반도체공학회 논문 1편 / 전자공학회 KCI 우수등재 논문 1편 / CPU설계 수업 조교
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PUBLICATIONS -->
-  <section id="publications">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2 class="section-title">Publications</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <div class="pub-list">
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge review">Under<br>Review</span>
-        <div>
-          <div class="pub-title">HeteroX: AI–SoC Based Educational Platform for Autonomous Vehicle Systems via Project-Based Learning and Competition</div>
-          <div class="pub-venue">IEEE Transactions on Intelligent Vehicles (SCIE, IF=14.3)</div>
-        </div>
-        <div class="pub-author">제 2저자</div>
-      </div>
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge ieee">IEEE<br>ICCE-Asia</span>
-        <div>
-          <div class="pub-title">Implementation of an Integrated SoC for Zynq based DPU and Surround View Monitor</div>
-          <div class="pub-venue">ICCE-Asia — 국제 학술 대회, 포스터 발표</div>
-        </div>
-        <div class="pub-author">제 1저자</div>
-      </div>
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge ieee">IEEE<br>ITC-CSCC</span>
-        <div>
-          <div class="pub-title">Design of a preprocessing system suitable for Surround View Monitor based on Zynq</div>
-          <div class="pub-venue">ITC-CSCC — 국제 학술 대회, 구두 발표</div>
-        </div>
-        <div class="pub-author">제 1저자</div>
-      </div>
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge ieee">IEEE<br>ICMRE</span>
-        <div>
-          <div class="pub-title">Real-Time Flexible Accelerator for Fisheye Image Correction Based on Zynq SoC</div>
-          <div class="pub-venue">ICMRE — 국제 학술 대회, 구두 발표</div>
-        </div>
-        <div class="pub-author">제 1저자</div>
-      </div>
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge domestic">KCI<br>우수등재</span>
-        <div>
-          <div class="pub-title">FPGA를 이용한 32-bit RISC-V RV32I 기반 최적화된 캐시 구조 설계 및 분석 연구</div>
-          <div class="pub-venue">대한전자공학회 — 국내 학술 저널</div>
-        </div>
-        <div class="pub-author">제 1저자</div>
-      </div>
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge domestic">국내<br>학술지</span>
-        <div>
-          <div class="pub-title">임베디드 시스템에서의 RISC-V 성능 향상을 위한 직접 사상 캐시 설계 및 검증</div>
-          <div class="pub-venue">반도체공학회 — 국내 학술 대회</div>
-        </div>
-        <div class="pub-author">제 1저자</div>
-      </div>
-
-      <div class="pub-item fade-up">
-        <span class="pub-badge domestic">국내<br>학술지</span>
-        <div>
-          <div class="pub-title">RISC-V RV32I 파이프라인 프로세서 및 주변장치 FPGA검증</div>
-          <div class="pub-venue">대한전기학회 — 최우수상</div>
-        </div>
-        <div class="pub-author">제 1저자</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ACTIVITIES -->
-  <section id="activities">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2 class="section-title">Activities</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;">
+    <div class="pub-item fade-up">
+      <span class="pub-badge ieee">IEEE<br>ICCE-Asia</span>
       <div>
-        <h3 style="font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">석사 · 조교 활동</h3>
-        <div class="timeline fade-up">
-          <div class="timeline-item">
-            <div class="timeline-period">2025.12 – 2026.01</div>
-            <div class="timeline-title">단기강좌 총괄</div>
-            <div class="timeline-sub">2025 교내 동계 단기강좌 〈자율주행 AI칩 설계〉</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2025.06 – 2025.07</div>
-            <div class="timeline-title">교내 경진대회 총괄</div>
-            <div class="timeline-sub">제 3회 성균관대학교 자율주행 경진대회</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2025.03 – 2025.06</div>
-            <div class="timeline-title">수업 조교 — 마이크로프로세서</div>
-            <div class="timeline-sub">성균관대학교</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2025.01 – 2025.02</div>
-            <div class="timeline-title">단기강좌 조교</div>
-            <div class="timeline-sub">2024 교내 동계 단기강좌 〈자율주행 AI칩 설계〉</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2024.09 – 2024.12</div>
-            <div class="timeline-title">수업 조교 — 컴퓨터구조론</div>
-            <div class="timeline-sub">성균관대학교</div>
-          </div>
-        </div>
+        <div class="pub-title">Implementation of an Integrated SoC for Zynq based DPU and Surround View Monitor</div>
+        <div class="pub-venue">ICCE-Asia &nbsp;|&nbsp; 국제 학술 대회, IEEE 등재</div>
+        <div class="pub-note">포스터 발표</div>
       </div>
+      <div class="pub-author">제 1저자</div>
+    </div>
 
+    <div class="pub-item fade-up">
+      <span class="pub-badge ieee">IEEE<br>ITC-CSCC</span>
       <div>
-        <h3 style="font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">학부 · 활동</h3>
-        <div class="timeline fade-up">
-          <div class="timeline-item">
-            <div class="timeline-period">2023.09 – 2023.12</div>
-            <div class="timeline-title">수업 조교 — CPU 설계</div>
-            <div class="timeline-sub">강의자료 및 RISC-V RV32I 스켈레톤 코드 제작</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2023.06 – 2023.08</div>
-            <div class="timeline-title">부트캠프 총괄</div>
-            <div class="timeline-sub">2023 피어오름 여름 Verilog HDL 부트캠프</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2023.03 – 2024.02</div>
-            <div class="timeline-title">학부연구생</div>
-            <div class="timeline-sub">IDSDLAB — 김용우 교수님</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-period">2022.03 – 2023.12</div>
-            <div class="timeline-title">학생회</div>
-            <div class="timeline-sub">상명대 시스템반도체공학과 학생회</div>
-          </div>
+        <div class="pub-title">Design of a preprocessing system suitable for Surround View Monitor based on Zynq</div>
+        <div class="pub-venue">ITC-CSCC &nbsp;|&nbsp; 국제 학술 대회, IEEE 등재</div>
+        <div class="pub-note">구두 발표</div>
+      </div>
+      <div class="pub-author">제 1저자</div>
+    </div>
+
+    <div class="pub-item fade-up">
+      <span class="pub-badge ieee">IEEE<br>ICMRE</span>
+      <div>
+        <div class="pub-title">Real-Time Flexible Accelerator for Fisheye Image Correction Based on Zynq SoC</div>
+        <div class="pub-venue">ICMRE &nbsp;|&nbsp; 국제 학술 대회, IEEE 등재</div>
+        <div class="pub-note">구두 발표</div>
+      </div>
+      <div class="pub-author">제 1저자</div>
+    </div>
+
+  </div>
+
+  <p class="sub-label" style="margin-bottom:1.5rem;">국내 학술지 / 학회</p>
+  <div class="pub-list">
+
+    <div class="pub-item fade-up">
+      <span class="pub-badge domestic">KCI<br>우수등재</span>
+      <div>
+        <div class="pub-title">FPGA를 이용한 32-bit RISC-V RV32I 기반 최적화된 캐시 구조 설계 및 분석 연구</div>
+        <div class="pub-venue">대한전자공학회 &nbsp;|&nbsp; 국내 학술 저널, KCI 우수 등재</div>
+      </div>
+      <div class="pub-author">제 1저자</div>
+    </div>
+
+    <div class="pub-item fade-up">
+      <span class="pub-badge domestic">국내<br>학회</span>
+      <div>
+        <div class="pub-title">임베디드 시스템에서의 RISC-V 성능 향상을 위한 직접 사상 캐시 설계 및 검증</div>
+        <div class="pub-venue">반도체공학회 &nbsp;|&nbsp; 국내 학술 대회</div>
+        <div class="pub-note">포스터 발표</div>
+      </div>
+      <div class="pub-author">제 1저자</div>
+    </div>
+
+    <div class="pub-item fade-up">
+      <span class="pub-badge domestic">대한<br>전기학회</span>
+      <div>
+        <div class="pub-title">RISC-V RV32I 파이프라인 프로세서 및 주변장치 FPGA검증</div>
+        <div class="pub-venue">대한전기학회 &nbsp;|&nbsp; 국내 학술 대회 &nbsp;|&nbsp; <strong style="color:var(--accent);">최우수상</strong></div>
+        <div class="pub-note">녹화 영상 발표</div>
+      </div>
+      <div class="pub-author">제 1저자</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Activities</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="activities-grid">
+    <!-- 석사 조교 -->
+    <div>
+      <p class="sub-label">석사 · 조교 활동</p>
+      <div class="timeline fade-up">
+        <div class="timeline-item">
+          <div class="timeline-period">2025.12 – 2026.01</div>
+          <div class="timeline-title">단기강좌 총괄</div>
+          <div class="timeline-sub">2025 교내 동계 단기강좌 〈자율주행 AI칩 설계〉</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2025.06 – 2025.07</div>
+          <div class="timeline-title">교내 경진대회 총괄</div>
+          <div class="timeline-sub">제 3회 성균관대학교 자율주행 경진대회<br>〈자율주행 AI칩 설계 경진대회〉</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2025.03 – 2025.06</div>
+          <div class="timeline-title">수업 조교 — 마이크로프로세서</div>
+          <div class="timeline-sub">성균관대학교</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2025.01 – 2025.02</div>
+          <div class="timeline-title">단기강좌 조교</div>
+          <div class="timeline-sub">2024 교내 동계 단기강좌 〈자율주행 AI칩 설계〉</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2024.09 – 2024.12</div>
+          <div class="timeline-title">수업 조교 — 컴퓨터구조론</div>
+          <div class="timeline-sub">성균관대학교</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-name">HoBin Oh</div>
-    <div class="footer-info">
-      <p><a href="/cdn-cgi/l/email-protection#30585f52595e00060706705451455d1e5e5544"><span class="__cf_email__" data-cfemail="4820272a2126787e7f7e082c293d2566262d3c">[email&#160;protected]</span></a></p>
-      <p>010-7607-0676</p>
-      <p style="margin-top:0.5rem; color:var(--text3);">© 2026 HoBin Oh. All rights reserved.</p>
+    <!-- 학부 활동 -->
+    <div>
+      <p class="sub-label">학부 · 활동</p>
+      <div class="timeline fade-up">
+        <div class="timeline-item">
+          <div class="timeline-period">2023.09 – 2023.12</div>
+          <div class="timeline-title">수업 조교 — CPU 설계</div>
+          <div class="timeline-sub">강의자료 및 RISC-V RV32I 스켈레톤 코드 / 검증 테스트 벡터 제작</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2023.06 – 2023.08</div>
+          <div class="timeline-title">부트캠프 총괄</div>
+          <div class="timeline-sub">2023 피어오름 여름 Verilog HDL 부트캠프</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2023.03 – 2024.02</div>
+          <div class="timeline-title">학부연구생</div>
+          <div class="timeline-sub">IDSDLAB — 김용우 교수님</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">2022.03 – 2023.12</div>
+          <div class="timeline-title">학생회</div>
+          <div class="timeline-sub">상명대학교 시스템반도체공학과 학생회</div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Intersection Observer for fade-up
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">HoBin Oh</div>
+  <div class="footer-info">
+    <p><a href="mailto:hobin0676@daum.net">hobin0676@daum.net</a></p>
+    <p>010-7607-0676</p>
+    <p style="margin-top:0.5rem;">© 2026 HoBin Oh. All rights reserved.</p>
+  </div>
+</footer>
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Skill bar animation on scroll
-    const skillObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (e
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+          fill.style.animation = 'none';
+          fill.offsetHeight;
+          fill.style.animation = 'fillBar 1.5s ease forwards';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.about-skills').forEach(el => skillObserver.observe(el));
+</script>
+</body>
+</html>
