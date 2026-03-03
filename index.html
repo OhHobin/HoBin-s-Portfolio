@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoBin Oh — RTL Design Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --line: #2a2a2a;
+      --accent: #00ff9d;
+      --accent2: #0066ff;
+      --text: #e8e8e8;
+      --text2: #888;
+      --text3: #555;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.3;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text2);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 5rem;
+      position: relative;
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-name-en {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--text2);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text2);
+      max-width: 420px;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-traits {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-trait {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-trait span {
+      color: var(--accent);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text2);
+      border-color: var(--line);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text2);
+      color: var(--text);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5rem 5rem 5rem 3rem;
+      position: relative;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .stat-box {
+      background: var(--bg2);
+      padding: 1.8rem;
+      transition: background 0.2s;
+    }
+
+    .stat-box:hover { background: var(--bg3); }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-contact {
+      margin-top: 1.5rem;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+    }
+
+    .contact-row .label { color: var(--text3); }
+    .contact-row .value { color: var(--text2); }
+    .contact-row .value a { color: var(--accent); text-decoration: none; }
+
+    /* SECTIONS */
+    section {
+      padding: 8rem 5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* ABOUT */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .edu-item {
+      padding: 2rem;
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .edu-item:hover { border-color: var(--accent); }
+
+    .edu-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .edu-school {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-dept {
+      font-size: 0.85rem;
+      color: var(--text2);
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-gpa {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+    }
+
+    .about-skills {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .skill-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text2);
+      width: 140px;
+      flex-shrink: 0;
+    }
+
+    .skill-bar {
+      flex: 1;
+      height: 3px;
+      background: var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform-origin: left;
+      animation: fillBar 1.5s ease forwards;
+      transform: scaleX(0);
+    }
+
+    @keyframes fillBar {
+      to { transform: scaleX(1); }
+    }
+
+    /* PROJECTS */
+    #projects .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .project-card {
+      background: var(--bg2);
+      padding: 2.5rem;
+      position: relative;
+      transition: background 0.25s;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.3s ease;
+    }
+
+    .project-card:hover { background: var(--bg3); }
+    .project-card:hover::before { height: 100%; }
+
+    .project-period {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-title {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--line);
+      color: var(--text3);
+      letter-spacing: 0.05em;
+    }
+
+    .tag.accent { border-color: var(--accent); color: var(--accent); }
+
+    .project-contrib {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* PUBLICATIONS */
+    #publications .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .pub-item {
+      background: var(--bg2);
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .pub-item:hover { background: var(--bg3); }
+
+    .pub-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid;
+      text-align: center;
+      line-height: 1.3;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    .pub-badge.ieee { border-color: var(--accent2); color: var(--accent2); }
+    .pub-badge.domestic { border-color: var(--text3); color: var(--text3); }
+    .pub-badge.review { border-color: #ff9900; color: #ff9900; }
+
+    .pub-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-venue {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text3);
+    }
+
+    .pub-author {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* ACTIVITIES */
+    #activities .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 2.5rem 2.5rem;
+      margin-left: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 6px;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .timeline-period {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-sub {
+      font-size: 0.8rem;
+      color: var(--text2);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 4rem 5rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--text3);
+    }
+
+    .footer-info {
+      text-align: right;
+    }
+
+    .footer-info p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text3);
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-info a { color: var(--accent); text-decoration: none; }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--line); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 1.5rem 2rem; }
+      .hero-right { padding: 2rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      #projects .projects-grid { grid-template-columns: 1fr; }
+      .pub-item { grid-template-columns: 1fr; gap: 0.8rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-info { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">HoBin Oh</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Papers</a></li>
+      <li><a href="#activities">Activities</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+
+    <div class="hero-left">
+      <div class="hero-tag">RTL Design Engineer</div>
+      <h1 class="hero-name">오호빈</h1>
+      <p class="hero-name-en">HoBin Oh</p>
+      <p class="hero-desc">
+        FPGA·SoC 기반 하드웨어 설계 엔지니어.<br>
+        자율주행, AI 가속기, 프로세서 아키텍처 분야의
+        RTL 설계 및 연구를 수행합니다.
+      </p>
+      <div class="hero-traits">
+        <span class="hero-trait"><span>—</span> 데드라인을 철저히 지킵니다.</span>
+        <span class="hero-trait"><span>—</span> 빠른 적응력으로 어떤 환경이든 자연스럽게 녹아듭니다.</span>
+        <span class="hero-trait"><span>—</span> 계획한 것은 반드시 결과로 도출해냅니다.</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="mailto:hobin0676@daum.net" class="btn btn-secondary">Contact</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Research Projects</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Publications</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4.5</div>
+          <div class="stat-label">Major GPA / 4.5</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">3×</div>
+          <div class="stat-label">IEEE Papers</div>
+        </div>
+      </div>
+      <div class="hero-contact">
+        <div class="contact-row">
+          <span class="label">EMAIL</span>
+          <span class="value"><a href="mailto:hobin0676@daum.net">hobin0676@daum.net</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="label">TEL</span>
+          <span class="value">010-7607-0676</span>
+        </div>
+        <div class="contact-row">
+          <span class="label">LOCATION</span>
+          <span class="value">경기도 화성시</span>
+        </div>
+        <div class="contact-row">
+          <span class="label">STATUS</span>
+          <span class="value" style="color: var(--accent);">● 석사과정 재학 중</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem;">Education</h3>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="edu-item fade-up">
+            <div class="edu-year">2024.08 – 2026.08 (예정)</div>
+            <div class="edu-school">성균관대학교</div>
+            <div class="edu-dept">전자전기컴퓨터공학과 석사과정</div>
+            <div class="edu-gpa">GPA 4.0 / 4.5</div>
+          </div>
+          <div class="edu-item fade-up">
+            <div class="edu-year">2021.03 – 2024.08</div>
+            <div class="edu-school">상명대학교 천안캠퍼스</div>
+            <div class="edu-dept">시스템반도체공학과 학사</div>
+            <div class="edu-gpa">GPA 4.33 / 4.5 &nbsp;|&nbsp; 전공 4.5 / 4.5</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-top:2.5rem; margin-bottom:1.5rem;">Awards & Certs</h3>
+        <div style="display:flex;flex-direction:column;gap:0.8rem;">
+          <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
+            <div class="edu-year">2023.12</div>
+            <div class="edu-school" style="font-size:0.88rem;">대한전기학회 제 14회 작품경진대회 최우수상</div>
+          </div>
+          <div class="edu-item fade-up" style="padding:1.2rem 1.8rem;">
+            <div class="edu-year">2023.09</div>
+            <div class="edu-school" style="font-size:0.88rem;">리눅스마스터 2급</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem;">Technical Skills</h3>
+        <div class="about-skills fade-up">
+          <div class="skill-row">
+            <span class="skill-name">Verilog HDL</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Vivado / Vitis-AI</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">FPGA 설계</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Python</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">RTL 시뮬레이션</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">C / Assembly</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">AXI / AMBA Bus</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">VCS & Verdi</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--text3); letter-spacing:0.15em; text-transform:uppercase; margin-top:2.5rem; margin-bottom:1.2rem;">Research Areas</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" class="fade-up">
+          <span class="tag accent">FPGA/SoC 설계</span>
+          <span class="tag accent">AI 가속기</span>
+          <span class="tag accent">자율주행 아키텍처</span>
+          <span class="tag">RISC-V 프로세서</span>
+          <span class="tag">Cache Controller</span>
+          <span class="tag">RTL 설계</span>
+          <span class="tag">영상처리 가속</span>
+          <span class="tag">산업용 통신</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project-card fade-up">
+        <div class="project-period">2025.01 – 2026.01</div>
+        <div class="project-title">Zynq기반 서라운드 뷰 및 AI 가속기 통합 아키텍처</div>
+        <div class="project-desc">
+          HD 해상도 4채널 카메라 입력(1280×720)을 896×1024 단채널 서라운드 뷰로 합성하고, FINN기반 FCN-32s AI 가속기를 통합. End-to-End ≈ 32fps 달성.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Verilog HDL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Vivado</span>
+          <span class="tag accent">FINN</span>
+          <span class="tag accent">Zynq SoC</span>
+        </div>
+        <div class="project-contrib">
+          → DDR 대역폭 절감 / PL-PS 전달 지연 최소화 / LUT 효율 최적화
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-period">2024.09 – 2024.12</div>
+        <div class="project-title">Vitis-AI DPU를 활용한 자율주행 아키텍처</div>
+        <div class="project-desc">
+          Zynq 플랫폼에서 초음파 센서, PWM IP, Vitis-AI DPU를 통합. Yolo v3 모델 학습 → 양자화 → Vitis-AI DPU 통합 추론 파이프라인 구현.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Verilog HDL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Vitis-AI</span>
+          <span class="tag accent">YOLOv3</span>
+          <span class="tag accent">Zynq</span>
+        </div>
+        <div class="project-contrib">
+          → 2024/2025 교내 자율주행 단기강좌 진행 / 성균관대 자율주행 경진대회 총괄 / IEEE TIV 투고 (2저자)
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-period">2025.12 – 현재</div>
+        <div class="project-title">산업용 고속 백플레인 통신 슬레이브 모듈</div>
+        <div class="project-desc">
+          EtherCAT 기반 백플레인 통신 슬레이브 컨트롤러 설계. LVDS PHY (저속) 및 Transceiver PHY (고속) 이중 구성. RTL 완료 후 FPGA 검증 → ASIC 제작 예정.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Verilog HDL</span>
+          <span class="tag">Vivado</span>
+          <span class="tag accent">EtherCAT</span>
+          <span class="tag accent">ASIC</span>
+          <span class="tag">LVDS PHY</span>
+        </div>
+        <div class="project-contrib">
+          → on-the-fly 방식 백플레인 통신 / YASKAWA 산업 표준 적용
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-period">2024.08 – 2024.09</div>
+        <div class="project-title">영상처리기반 자율주행을 위한 전처리 가속기</div>
+        <div class="project-desc">
+          ROI, Grayscale, BEV Transform, Gaussian Blur, Sobel 알고리즘을 PL 영역에서 Stream 처리. Ultra96-V2에서 100MHz, 평균 101FPS 달성.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Verilog HDL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Vivado</span>
+          <span class="tag accent">Ultra96-V2</span>
+          <span class="tag">VDMA</span>
+        </div>
+        <div class="project-contrib">
+          → PS 처리 대비 1/5 시간 단축 / AI 기반 자율주행 필요성 도출
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="grid-column: 1 / -1;">
+        <div class="project-period">2023.07 – 2024.07 &nbsp;|&nbsp; 학사 졸업연구</div>
+        <div class="project-title">[학사] FPGA를 이용한 RISC-V RV32I와 Cache 통합 설계</div>
+        <div class="project-desc">
+          RV32I 5-Stage Pipeline 프로세서 설계 (Hazard Unit: FWD/Stall/Flush), Native → AMBA APB → AHB-Lite Bus Protocol 구현, Dhrystone·Coremark 벤치마크 검증.
+          Direct Mapped / N-Way Set-Associative / Fully Associative Cache Controller 설계 및 최적 임베디드 모델 도출 (Inst: 16KB, Data: 4KB @ 4-Way).
+        </div>
+        <div class="project-tags">
+          <span class="tag">Verilog HDL</span>
+          <span class="tag">C / Assembly</span>
+          <span class="tag">VCS & Verdi</span>
+          <span class="tag">Vivado</span>
+          <span class="tag accent">RISC-V RV32I</span>
+          <span class="tag accent">Cache Controller</span>
+          <span class="tag">AMBA Bus</span>
+          <span class="tag">Nexys A7</span>
+        </div>
+        <div class="project-contrib">
+          → 대한전기학회 최우수상 / 반도체공학회 논문 1편 / 전자공학회 KCI 우수등재 논문 1편 / CPU설계 수업 조교
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Publications</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="pub-list">
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge review">Under<br>Review</span>
+        <div>
+          <div class="pub-title">HeteroX: AI–SoC Based Educational Platform for Autonomous Vehicle Systems via Project-Based Learning and Competition</div>
+          <div class="pub-venue">IEEE Transactions on Intelligent Vehicles (SCIE, IF=14.3)</div>
+        </div>
+        <div class="pub-author">제 2저자</div>
+      </div>
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge ieee">IEEE<br>ICCE-Asia</span>
+        <div>
+          <div class="pub-title">Implementation of an Integrated SoC for Zynq based DPU and Surround View Monitor</div>
+          <div class="pub-venue">ICCE-Asia — 국제 학술 대회, 포스터 발표</div>
+        </div>
+        <div class="pub-author">제 1저자</div>
+      </div>
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge ieee">IEEE<br>ITC-CSCC</span>
+        <div>
+          <div class="pub-title">Design of a preprocessing system suitable for Surround View Monitor based on Zynq</div>
+          <div class="pub-venue">ITC-CSCC — 국제 학술 대회, 구두 발표</div>
+        </div>
+        <div class="pub-author">제 1저자</div>
+      </div>
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge ieee">IEEE<br>ICMRE</span>
+        <div>
+          <div class="pub-title">Real-Time Flexible Accelerator for Fisheye Image Correction Based on Zynq SoC</div>
+          <div class="pub-venue">ICMRE — 국제 학술 대회, 구두 발표</div>
+        </div>
+        <div class="pub-author">제 1저자</div>
+      </div>
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge domestic">KCI<br>우수등재</span>
+        <div>
+          <div class="pub-title">FPGA를 이용한 32-bit RISC-V RV32I 기반 최적화된 캐시 구조 설계 및 분석 연구</div>
+          <div class="pub-venue">대한전자공학회 — 국내 학술 저널</div>
+        </div>
+        <div class="pub-author">제 1저자</div>
+      </div>
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge domestic">국내<br>학술지</span>
+        <div>
+          <div class="pub-title">임베디드 시스템에서의 RISC-V 성능 향상을 위한 직접 사상 캐시 설계 및 검증</div>
+          <div class="pub-venue">반도체공학회 — 국내 학술 대회</div>
+        </div>
+        <div class="pub-author">제 1저자</div>
+      </div>
+
+      <div class="pub-item fade-up">
+        <span class="pub-badge domestic">국내<br>학술지</span>
+        <div>
+          <div class="pub-title">RISC-V RV32I 파이프라인 프로세서 및 주변장치 FPGA검증</div>
+          <div class="pub-venue">대한전기학회 — 최우수상</div>
+        </div>
+        <div class="pub-author">제 1저자</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Activities</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;">
+      <div>
+        <h3 style="font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">석사 · 조교 활동</h3>
+        <div class="timeline fade-up">
+          <div class="timeline-item">
+            <div class="timeline-period">2025.12 – 2026.01</div>
+            <div class="timeline-title">단기강좌 총괄</div>
+            <div class="timeline-sub">2025 교내 동계 단기강좌 〈자율주행 AI칩 설계〉</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2025.06 – 2025.07</div>
+            <div class="timeline-title">교내 경진대회 총괄</div>
+            <div class="timeline-sub">제 3회 성균관대학교 자율주행 경진대회</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2025.03 – 2025.06</div>
+            <div class="timeline-title">수업 조교 — 마이크로프로세서</div>
+            <div class="timeline-sub">성균관대학교</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2025.01 – 2025.02</div>
+            <div class="timeline-title">단기강좌 조교</div>
+            <div class="timeline-sub">2024 교내 동계 단기강좌 〈자율주행 AI칩 설계〉</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2024.09 – 2024.12</div>
+            <div class="timeline-title">수업 조교 — 컴퓨터구조론</div>
+            <div class="timeline-sub">성균관대학교</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">학부 · 활동</h3>
+        <div class="timeline fade-up">
+          <div class="timeline-item">
+            <div class="timeline-period">2023.09 – 2023.12</div>
+            <div class="timeline-title">수업 조교 — CPU 설계</div>
+            <div class="timeline-sub">강의자료 및 RISC-V RV32I 스켈레톤 코드 제작</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2023.06 – 2023.08</div>
+            <div class="timeline-title">부트캠프 총괄</div>
+            <div class="timeline-sub">2023 피어오름 여름 Verilog HDL 부트캠프</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2023.03 – 2024.02</div>
+            <div class="timeline-title">학부연구생</div>
+            <div class="timeline-sub">IDSDLAB — 김용우 교수님</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-period">2022.03 – 2023.12</div>
+            <div class="timeline-title">학생회</div>
+            <div class="timeline-sub">상명대 시스템반도체공학과 학생회</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">HoBin Oh</div>
+    <div class="footer-info">
+      <p><a href="mailto:hobin0676@daum.net">hobin0676@daum.net</a></p>
+      <p>010-7607-0676</p>
+      <p style="margin-top:0.5rem; color:var(--text3);">© 2026 HoBin Oh. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Skill bar animation on scroll
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+            fill.style.animation = 'none';
+            fill.offsetHeight;
+            fill.style.animation = 'fillBar 1.5s ease forwards';
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.about-skills').forEach(el => skillObserver.observe(el));
+  </script>
+</body>
+</html>
